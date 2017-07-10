@@ -270,7 +270,7 @@ void W25QXX_Read_16(u16* Buffer16,u32 ReadAddr,u16 NumByteToRead)
 	}
 }	
 //–¥»Îflash
-	u8 Buffer_Write[2000];
+u8 Buffer_Write[2000];
 void W25QXX_Write_16(u16* Buffer16,u32 WriteAddr,u16 NumByteToWrite)
 {
 	u16 i = 0;
