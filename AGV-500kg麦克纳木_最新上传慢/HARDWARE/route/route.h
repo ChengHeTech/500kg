@@ -150,6 +150,8 @@ extern void GetRouteData(u16 num);
 //保存路径信息,num:路径号
 extern void SetRouteData(u16 num);
 
+//保存站点信息,num:路径号，stationnum
+void SetStationData(u16 num,u16 stationnum);
 
 //更新路径站点数据到界面
 extern void UpdataStationToHmi(void);

@@ -62,7 +62,7 @@ CPU_STK	FLOAT_TASK_STK[FLOAT_STK_SIZE];
 void float_task(void *p_arg);
 
 //任务优先级
-#define Screen_TASK_PRIO		8
+#define Screen_TASK_PRIO		12
 //任务堆栈大小	
 #define Screen_STK_SIZE 		512
 //任务控制块
@@ -108,7 +108,7 @@ CPU_STK WIFI_TASK_STK[WIFI_STK_SIZE];
 void WIFI_task(void *p_arg);
 
 //任务优先级
-#define DEMO_TASK_PRIO		12
+#define DEMO_TASK_PRIO		8
 //任务堆栈大小	
 #define DEMO_STK_SIZE 		512
 //任务控制块
@@ -1163,8 +1163,9 @@ void Screen_task(void*p_arg)
 								HmiRouteEnter = 0;
 								//更新站点数据到当前数据
 								UpdataStationToNow();
-								//保存当前站点数据
-								SetRouteData(HmiRouteNum);
+
+								//保存站点信息
+								SetStationData(HmiRouteNum,HmiStationSerialNum-1);
 								//退出添加模式
 								HmiRoutemode = 0;
 							}
@@ -2192,12 +2193,12 @@ void DEMO_task(void *p_arg)
 	while(1)
 	{	
 		num++;
-		if(num==40)
+		if(num==20)
 		{
 			num=0;
 			IWDG_Feed();//喂狗
 		}		
-		delay(0,0,0,10);      
+		osdelay_ms(10);   
 	}
 }
 

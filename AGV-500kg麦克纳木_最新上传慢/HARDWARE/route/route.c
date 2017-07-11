@@ -91,7 +91,6 @@ void SetRouteData(u16 num)
 	//保存
 	W25QXX_Write_16(&RouteStationNum[HmiRouteNum-1],RouteStationNumAdress(HmiRouteNum),1);	
 
-	
 	//保存路径站点包含信息
 	for(i=0;i<RouteStationNum[num-1];i++)
 	{
@@ -99,7 +98,17 @@ void SetRouteData(u16 num)
 	}
 }
 
+//保存站点信息,num:路径号，stationnum
+void SetStationData(u16 num,u16 stationnum)
+{
+	//保存路径包含站点数
+	RouteStationNum[HmiRouteNum-1] = HmiStationNum;
+	//保存
+	W25QXX_Write_16(&RouteStationNum[HmiRouteNum-1],RouteStationNumAdress(HmiRouteNum),1);	
 
+	//保存路径站点包含信息
+	W25QXX_Write_16(&NowRouteInfor[stationnum][0],NowStationInforAdress(num,stationnum),StaiionInfor);	
+}
 
 //更新路径站点数据到界面
 void UpdataStationToHmi()

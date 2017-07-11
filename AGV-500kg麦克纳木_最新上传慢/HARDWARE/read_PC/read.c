@@ -182,6 +182,7 @@ void SetProcessData_pc(u16 liucheng_nember,u16 xuhao_sum)
 }
 u8 send_ok,receive_ok,readstate=0,lujing_readstate=0,zhandian_readstate = 0,liucheng_readstate = 0,xuhao_readstate = 0;
 u16 sum,parment_number,lujing_number,i,liucheng_number,zhandian_number,xuhao_number,zhandian_sum,xuhao_sum,rout_number;
+u8 lujing_cun[RouteNum],liucheng_cun[ProcessNum];
 void data_Parameterreceive()
 {
 	u16 temp=0;
@@ -203,8 +204,12 @@ void data_Parameterreceive()
 			{
 				for(i=1;i<=500;i++)
 				{
-					if(GetProcessStepNum(i))	
-						temp++;
+					if(GetProcessStepNum(i)==0)
+					{
+						continue;
+					}					
+					liucheng_cun[temp] = i;
+					temp++;						
 				}
 				SystemParameter[98] = temp;	
 				temp = 0;
@@ -213,8 +218,12 @@ void data_Parameterreceive()
 			{
 				for(i=1;i<=500;i++)
 				{
-					if(GetRouteStationNum(i))	
-						temp++;
+					if(GetRouteStationNum(i)==0)
+					{
+						continue;
+					}	
+					lujing_cun[temp] = i;	
+					temp++;					
 				}
 				SystemParameter[99] = temp;
 			}
@@ -241,21 +250,22 @@ void data_Parameterreceive()
 			send_ok = 0;
 			send6_buf[2] = 0;
 			send6_buf[3] = 31;
-			
-			send6_buf[4] = rece6_buf[1];
-			send6_buf[5] = rece6_buf[2];
-			
+						
 			lujing_number = rece6_buf[1] << 8 | rece6_buf[2];
-			HmiRouteNum = lujing_number;
-			GetRouteData(lujing_number);
+			
+			send6_buf[4] = lujing_cun[lujing_number-1]>>8;
+			send6_buf[5] = lujing_cun[lujing_number-1]&0xff;	
+			
+			HmiRouteNum = lujing_cun[lujing_number-1];
+			GetRouteData(lujing_cun[lujing_number-1]);
 			if(HmiStationNum>0)
 				HmiStationSerialNum = 1;
 			UpdataStationToHmi();
-			send6_buf[6] = RouteStationNum[lujing_number-1]>>8;
-			send6_buf[7] = RouteStationNum[lujing_number-1]&0xff;		
-			if(RouteStationNum[lujing_number-1]!=0)
+			send6_buf[6] = RouteStationNum[lujing_cun[lujing_number-1]-1]>>8;
+			send6_buf[7] = RouteStationNum[lujing_cun[lujing_number-1]-1]&0xff;		
+			if(RouteStationNum[lujing_cun[lujing_number-1]-1]!=0)
 			{
-				for(i=0;i<RouteStationNum[lujing_number-1];i++)
+				for(i=0;i<RouteStationNum[lujing_cun[lujing_number-1]-1];i++)
 				{
 					send_ok = 0;
 					send6_buf[8] = NowRouteInfor[i][0];
@@ -346,19 +356,21 @@ void data_Parameterreceive()
 			send6_buf[2] = 0;
 			send6_buf[3] = 16;
 			
-			send6_buf[4] = rece6_buf[1];
-			send6_buf[5] = rece6_buf[2];
-			
 			liucheng_number = rece6_buf[1] << 8 | rece6_buf[2];
-			HmiProcessNum = liucheng_number;
+			
+			send6_buf[4] = liucheng_cun[liucheng_number-1]>>8;
+			send6_buf[5] = liucheng_cun[liucheng_number-1]&0xff;
+			
+
+			HmiProcessNum = liucheng_cun[liucheng_number-1];
 			GetProcessData();						
 			UpdataProcessToHmi();
 			
-			send6_buf[6] = ProcessStepNum[liucheng_number-1]>>8;
-			send6_buf[7] = ProcessStepNum[liucheng_number-1]&0xff;		
-			if(ProcessStepNum[liucheng_number-1]!=0)
+			send6_buf[6] = ProcessStepNum[liucheng_cun[liucheng_number-1]-1]>>8;
+			send6_buf[7] = ProcessStepNum[liucheng_cun[liucheng_number-1]-1]&0xff;		
+			if(ProcessStepNum[liucheng_cun[liucheng_number-1]-1]!=0)
 			{
-				for(i=0;i<ProcessStepNum[liucheng_number-1];i++)
+				for(i=0;i<ProcessStepNum[liucheng_cun[liucheng_number-1]-1];i++)
 				{
 					send_ok = 0;					
 					send6_buf[8] = NowProcessInfor[i][0]>>8;
@@ -427,7 +439,7 @@ void data_Parameterreceive()
 				send6_buf[7] = rece6_buf[5];				
 				sum = send6_buf[0]+send6_buf[1]+send6_buf[2]+send6_buf[3]+send6_buf[4]+send6_buf[5]+send6_buf[6]+send6_buf[7];
 				send6_buf[8] = sum>>8;send6_buf[9] = sum&0xff;
-				Clear_ReceBuf(6);
+				Clear_ReceBuf(6);				
 				Uart6_Start_DMA_Tx(10);
 				while(send_ok == 0)
 				{
