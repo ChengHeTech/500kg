@@ -13,7 +13,7 @@ extern u16 SystemParameter[SystemParaNum];//系统参数
 //路径: 共500个路径，每个路径100个站点，每个站点16个信息，每个信息2个字节
 #define RouteNum 500  //路径总数
 #define StationNum 100 //每条路径包含站点数
-#define StaiionInfor 20 //每个站点包含信息数
+#define StaiionInfor 25 //每个站点包含信息数
 
 #define RouteStationNumAdress(n) SystemParaNum+n-1  //每条路径包含站点数信息地址
 #define NowRouteInforAdress(n)       RouteStationNumAdress(RouteNum)+1+StationNum*StaiionInfor*(n-1)  //当前路径信息地址
@@ -25,7 +25,7 @@ extern u16 NowRouteInfor[StationNum][StaiionInfor];   //当前路径信息
 //流程: 共500个流程，每个流程100步，每步5个信息，每个信息2个字节
 #define ProcessNum 500  //流程总数
 #define StepNum 100 //每条流程包含步数
-#define StepInfor 5 //每步包含信息数
+#define StepInfor 50 //每步包含信息数
 
 #define ProcessStepNumAdress(n)   NowRouteInforAdress(RouteNum+1)+n  //每个流程包含步数信息地址
 #define NowProcessInforAdress(n)  ProcessStepNumAdress(ProcessNum)+1+StepNum*StepInfor*(n-1)  //当前流程信息地址

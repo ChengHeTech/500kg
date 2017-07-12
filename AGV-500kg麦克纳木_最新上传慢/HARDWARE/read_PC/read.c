@@ -181,11 +181,12 @@ void SetProcessData_pc(u16 liucheng_nember,u16 xuhao_sum)
 		W25QXX_Write_16(&NowProcessInfor[i][0],NowStepInforAdress(liucheng_nember,i),StepInfor);
 }
 u8 send_ok,receive_ok,readstate=0,lujing_readstate=0,zhandian_readstate = 0,liucheng_readstate = 0,xuhao_readstate = 0;
-u16 sum,parment_number,lujing_number,i,liucheng_number,zhandian_number,xuhao_number,zhandian_sum,xuhao_sum,rout_number;
+u16 sum,parment_number,lujing_number,liucheng_number,zhandian_number,xuhao_number,zhandian_sum,xuhao_sum,rout_number;
 u8 lujing_cun[RouteNum],liucheng_cun[ProcessNum];
+u16 length = 0;
 void data_Parameterreceive()
 {
-	u16 temp=0;
+	u16 temp=0,i,j,k;
 	if((rece6_buf[0] == 0xAA)&&(rece6_buf[3] == 0xb4))//PC读取Flash系统参数
 	{
 		sum = rece6_buf[0]+rece6_buf[1]+rece6_buf[2]+rece6_buf[3];
@@ -227,6 +228,8 @@ void data_Parameterreceive()
 				}
 				SystemParameter[99] = temp;
 			}
+			SystemParameter[96] = StaiionInfor;
+			SystemParameter[97] = StepInfor;
 			send6_buf[6] = SystemParameter[parment_number]>>8;
 			send6_buf[7] = SystemParameter[parment_number]&0xff;
 			sum = send6_buf[0]+send6_buf[1]+send6_buf[2]+send6_buf[3]+send6_buf[4]+send6_buf[5]
@@ -245,11 +248,13 @@ void data_Parameterreceive()
 		sum = rece6_buf[0]+rece6_buf[1]+rece6_buf[2]+rece6_buf[3];
 		if(((sum>>8) ==rece6_buf[4]) &&((sum&0xff) ==rece6_buf[5]) )
 		{
+			sum = 0;
 			send6_buf[0] = 0xAA;send6_buf[1] = 0xBB;//帧头
 			receive_ok=0;
 			send_ok = 0;
-			send6_buf[2] = 0;
-			send6_buf[3] = 31;
+			length = 10+StaiionInfor*2;
+			send6_buf[2] = length>>8;
+			send6_buf[3] = length&0xff;
 						
 			lujing_number = rece6_buf[1] << 8 | rece6_buf[2];
 			
@@ -268,80 +273,24 @@ void data_Parameterreceive()
 				for(i=0;i<RouteStationNum[lujing_cun[lujing_number-1]-1];i++)
 				{
 					send_ok = 0;
-					send6_buf[8] = NowRouteInfor[i][0];
-					send6_buf[9] = NowRouteInfor[i][1];
-					send6_buf[10] = NowRouteInfor[i][2];
-					send6_buf[11] = NowRouteInfor[i][3];
-					send6_buf[12] = NowRouteInfor[i][4];
-					send6_buf[13] = NowRouteInfor[i][5]>>8;
-					send6_buf[14] = NowRouteInfor[i][5]&0xff;
-					send6_buf[15] = NowRouteInfor[i][6];
-					send6_buf[16] = NowRouteInfor[i][7];
-					send6_buf[17] = NowRouteInfor[i][8];
-					send6_buf[18] = NowRouteInfor[i][9];
-					send6_buf[19] = NowRouteInfor[i][10];
-					send6_buf[20] = NowRouteInfor[i][11];
-					send6_buf[21] = NowRouteInfor[i][12];
-					send6_buf[22] = NowRouteInfor[i][13];
-					send6_buf[23] = NowRouteInfor[i][14];
-					send6_buf[24] = NowRouteInfor[i][15];
-					send6_buf[25] = NowRouteInfor[i][16];
-					send6_buf[26] = NowRouteInfor[i][17];
-					send6_buf[27] = NowRouteInfor[i][18];
-					send6_buf[28] = NowRouteInfor[i][19];
-					
-					sum = send6_buf[0]+send6_buf[1]+send6_buf[2]+send6_buf[3]+send6_buf[4]+send6_buf[5]
-					+send6_buf[6]+send6_buf[7]+send6_buf[8]+send6_buf[9]+send6_buf[10]+send6_buf[11]
-					+send6_buf[12]+send6_buf[13]+send6_buf[14]+send6_buf[15]+send6_buf[16]+send6_buf[17]
-					+send6_buf[18]+send6_buf[19]+send6_buf[20]+send6_buf[21]+send6_buf[22]+send6_buf[23]
-					+send6_buf[24]+send6_buf[25]+send6_buf[26]+send6_buf[27]+send6_buf[28];
-					
-					send6_buf[29] = sum>>8;send6_buf[30] = sum&0xff;
-					Uart6_Start_DMA_Tx(31);
+					for(j = 0;j < StaiionInfor;j++)
+					{
+						send6_buf[2*j+8] = NowRouteInfor[i][j]>>8;
+						send6_buf[2*j+9] = NowRouteInfor[i][j]&0xff;
+					}
+					for(k=0;k<(length-2);k++)
+					{
+						sum += send6_buf[k];
+					}					
+					send6_buf[length-2] = sum>>8;send6_buf[length-1] = sum&0xff;
+					Uart6_Start_DMA_Tx(length);
 					while(send_ok == 0)
 					{
 						delay_ms(2);
 					}
 					Clear_ReceBuf(6);
+					sum = 0;
 				}			
-			}
-			else
-			{
-				send6_buf[8] = 0;
-				send6_buf[9] = 0;
-				send6_buf[10] = 0;
-				send6_buf[11] = 0;
-				send6_buf[12] = 0;
-				send6_buf[13] = 0;
-				send6_buf[14] = 0;
-				send6_buf[15] = 0;
-				send6_buf[16] = 0;
-				send6_buf[17] = 0;
-				send6_buf[18] = 0;
-				send6_buf[19] = 0;
-				send6_buf[20] = 0;
-				send6_buf[21] = 0;
-				send6_buf[22] = 0;
-				send6_buf[23] = 0;
-				send6_buf[24] = 0;
-				send6_buf[25] = 0;
-				send6_buf[26] = 0;
-				send6_buf[27] = 0;
-				send6_buf[28] = 0;
-				
-				sum = send6_buf[0]+send6_buf[1]+send6_buf[2]+send6_buf[3]+send6_buf[4]+send6_buf[5]
-				+send6_buf[6]+send6_buf[7]+send6_buf[8]+send6_buf[9]+send6_buf[10]+send6_buf[11]
-				+send6_buf[12]+send6_buf[13]+send6_buf[14]+send6_buf[15]+send6_buf[16]+send6_buf[17]
-				+send6_buf[18]+send6_buf[19]+send6_buf[20]+send6_buf[21]+send6_buf[22]+send6_buf[23]
-				+send6_buf[24]+send6_buf[25]+send6_buf[26]+send6_buf[27]+send6_buf[28];
-				
-				send6_buf[29] = sum>>8;send6_buf[30] = sum&0xff;
-				Uart6_Start_DMA_Tx(31);
-				while(send_ok == 0)
-				{
-					delay_ms(2);
-				}
-				Clear_ReceBuf(6);
 			}
 		}
 	}
@@ -350,11 +299,13 @@ void data_Parameterreceive()
 		sum = rece6_buf[0]+rece6_buf[1]+rece6_buf[2]+rece6_buf[3];
 		if(((sum>>8) ==rece6_buf[4]) &&((sum&0xff) ==rece6_buf[5]) )
 		{
+			sum = 0;
 			send6_buf[0] = 0xAA;send6_buf[1] = 0xEE;//帧头
 			receive_ok=0;
 			send_ok = 0;
-			send6_buf[2] = 0;
-			send6_buf[3] = 16;
+			length = 10+StepInfor*2;
+			send6_buf[2] = length>>8;
+			send6_buf[3] = length&0xff;
 			
 			liucheng_number = rece6_buf[1] << 8 | rece6_buf[2];
 			
@@ -369,48 +320,28 @@ void data_Parameterreceive()
 			send6_buf[6] = ProcessStepNum[liucheng_cun[liucheng_number-1]-1]>>8;
 			send6_buf[7] = ProcessStepNum[liucheng_cun[liucheng_number-1]-1]&0xff;		
 			if(ProcessStepNum[liucheng_cun[liucheng_number-1]-1]!=0)
-			{
+			{				
 				for(i=0;i<ProcessStepNum[liucheng_cun[liucheng_number-1]-1];i++)
-				{
-					send_ok = 0;					
-					send6_buf[8] = NowProcessInfor[i][0]>>8;
-					send6_buf[9] = NowProcessInfor[i][0]&0xff;
-					send6_buf[10] = NowProcessInfor[i][1]>>8;
-					send6_buf[11] = NowProcessInfor[i][1]&0xff;
-					send6_buf[12] = NowProcessInfor[i][2]>>8;
-					send6_buf[13] = NowProcessInfor[i][2]&0xff;
-					sum = send6_buf[0]+send6_buf[1]+send6_buf[2]+send6_buf[3]+send6_buf[4]+send6_buf[5]
-					+send6_buf[6]+send6_buf[7]+send6_buf[8]+send6_buf[9]+send6_buf[10]+send6_buf[11]+send6_buf[12]
-					+send6_buf[13];
-					
-					send6_buf[14] = sum>>8;send6_buf[15] = sum&0xff;
-					Uart6_Start_DMA_Tx(16);
+				{					
+					send_ok = 0;
+					for(j = 0;j < StepInfor;j++)
+					{
+						send6_buf[2*j+8] = NowProcessInfor[i][j]>>8;
+						send6_buf[2*j+9] = NowProcessInfor[i][j]&0xff;
+					}
+					for(k=0;k<(length-2);k++)
+					{
+						sum += send6_buf[k];
+					}					
+					send6_buf[length-2] = sum>>8;send6_buf[length-1] = sum&0xff;
+					Uart6_Start_DMA_Tx(length);
 					while(send_ok == 0)
 					{
 						delay_ms(2);
 					}
 					Clear_ReceBuf(6);
+					sum = 0;
 				}			
-			}
-			else
-			{
-				send6_buf[8] = 0;
-				send6_buf[9] = 0;
-				send6_buf[10] = 0;
-				send6_buf[11] = 0;
-				send6_buf[12] = 0;
-				send6_buf[13] = 0;				
-				sum = send6_buf[0]+send6_buf[1]+send6_buf[2]+send6_buf[3]+send6_buf[4]+send6_buf[5]
-				+send6_buf[6]+send6_buf[7]+send6_buf[8]+send6_buf[9]+send6_buf[10]+send6_buf[11]+send6_buf[12]
-				+send6_buf[13];
-				
-				send6_buf[14] = sum>>8;send6_buf[15] = sum&0xff;
-				Uart6_Start_DMA_Tx(16);
-				while(send_ok == 0)
-				{
-					delay_ms(2);
-				}
-				Clear_ReceBuf(6);
 			}
 		}
 	}

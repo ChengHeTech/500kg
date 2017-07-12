@@ -164,7 +164,6 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGUARM</Key>
-          <Name></Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -201,34 +200,82 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>491</LineNumber>
+          <LineNumber>276</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134270000</Address>
+          <Address>134265714</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>C:\Users\Administrator\Desktop\AGV-500kg楹﹀厠绾虫湪_鏈€鏂颁笂浼犳參\HARDWARE\read_PC\read.c</Filename>
+          <Filename>D:\鎴戠殑鏂囨。\GitHub\500kg----\AGV-500kg楹﹀厠绾虫湪_鏈€鏂颁笂浼犳參\HARDWARE\W25QXX\w25qxx.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>1169</LineNumber>
+          <LineNumber>225</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134252040</Address>
+          <Address>134267508</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>C:\Users\Administrator\Desktop\AGV-500kg楹﹀厠绾虫湪_鏈€鏂颁笂浼犳參\USER\main.c</Filename>
+          <Filename>D:\鎴戠殑鏂囨。\GitHub\500kg----\AGV-500kg楹﹀厠绾虫湪_鏈€鏂颁笂浼犳參\HARDWARE\read_PC\read.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Template\main.c\1169</Expression>
+          <Expression></Expression>
+        </Bp>
+        <Bp>
+          <Number>2</Number>
+          <Type>0</Type>
+          <LineNumber>223</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134267506</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>D:\鎴戠殑鏂囨。\GitHub\500kg----\AGV-500kg楹﹀厠绾虫湪_鏈€鏂颁笂浼犳參\HARDWARE\read_PC\read.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
+        </Bp>
+        <Bp>
+          <Number>3</Number>
+          <Type>0</Type>
+          <LineNumber>420</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134269732</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>D:\鎴戠殑鏂囨。\GitHub\500kg----\AGV-500kg楹﹀厠绾虫湪_鏈€鏂颁笂浼犳參\HARDWARE\read_PC\read.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Template\../HARDWARE/read_PC/read.c\420</Expression>
+        </Bp>
+        <Bp>
+          <Number>4</Number>
+          <Type>0</Type>
+          <LineNumber>188</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134267286</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>D:\鎴戠殑鏂囨。\GitHub\500kg----\AGV-500kg楹﹀厠绾虫湪_鏈€鏂颁笂浼犳參\HARDWARE\read_PC\read.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Template\../HARDWARE/read_PC/read.c\188</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -256,6 +303,56 @@
           <count>4</count>
           <WinNumber>1</WinNumber>
           <ItemText>ProcessStepNum,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>5</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>StaiionInfor</ItemText>
+        </Ww>
+        <Ww>
+          <count>6</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>RouteStationNum[num-1]</ItemText>
+        </Ww>
+        <Ww>
+          <count>7</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>NowRouteInfor</ItemText>
+        </Ww>
+        <Ww>
+          <count>8</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>NowStationInforAdress</ItemText>
+        </Ww>
+        <Ww>
+          <count>9</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>NowStationInforAdress</ItemText>
+        </Ww>
+        <Ww>
+          <count>10</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>NumByteToWrite,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>11</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>WriteAddr,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>12</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>Buffer16</ItemText>
+        </Ww>
+        <Ww>
+          <count>13</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>Buffer_Write</ItemText>
+        </Ww>
+        <Ww>
+          <count>14</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>lujing_cun,0x0A</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>

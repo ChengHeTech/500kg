@@ -291,8 +291,8 @@ void UserConfigInit(void)
 		SystemParameter[93] = 0;
 		SystemParameter[94] = 0;
 		SystemParameter[95] = 0;
-		SystemParameter[96] = 0;
-		SystemParameter[97] = 0;		
+		SystemParameter[96] = StaiionInfor;
+		SystemParameter[97] = StepInfor;		
 		SystemParameter[98] = 500;
 		SystemParameter[99] = 500;
 		SystemParameter[100] = 0;		

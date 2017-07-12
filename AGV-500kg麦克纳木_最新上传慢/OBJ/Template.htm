@@ -3,7 +3,7 @@
 <title>Static Call Graph - [..\OBJ\Template.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image ..\OBJ\Template.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050106: Last Updated: Tue Jul 11 16:35:27 2017
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050106: Last Updated: Wed Jul 12 12:53:22 2017
 <BR><P>
 <H3>Maximum Stack Usage =        216 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -986,7 +986,7 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> main.o(i.start_task)
 </UL>
 <P><STRONG><a name="[75]"></a>DEMO2_task</STRONG> (Thumb, 66 bytes, Stack size 0 bytes, main.o(i.DEMO2_task))
-<BR><BR>[Stack]<UL><LI>Max Depth = 176 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 192 + Unknown Stack Size
 <LI>Call Chain = DEMO2_task &rArr; data_Parameterreceive &rArr; SetProcessData_pc &rArr; W25QXX_Write_16 &rArr; W25QXX_Write &rArr; W25QXX_Write_NoCheck &rArr; W25QXX_Write_Page &rArr; W25QXX_Wait_Busy &rArr; W25QXX_ReadSR &rArr; SPI2_ReadWriteByte
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stop
@@ -1198,7 +1198,7 @@ Global Symbols
 <P><STRONG><a name="[b]"></a>DebugMon_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f4xx_it.o(i.DebugMon_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f40_41xxx.o(RESET)
 </UL>
-<P><STRONG><a name="[d3]"></a>DeleteProcessData</STRONG> (Thumb, 280 bytes, Stack size 16 bytes, route.o(i.DeleteProcessData))
+<P><STRONG><a name="[d3]"></a>DeleteProcessData</STRONG> (Thumb, 292 bytes, Stack size 16 bytes, route.o(i.DeleteProcessData))
 <BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = DeleteProcessData &rArr; W25QXX_Write_16 &rArr; W25QXX_Write &rArr; W25QXX_Write_NoCheck &rArr; W25QXX_Write_Page &rArr; W25QXX_Wait_Busy &rArr; W25QXX_ReadSR &rArr; SPI2_ReadWriteByte
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UpdataProcessToHmi
@@ -1271,7 +1271,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UserConfigInit
 </UL>
 
-<P><STRONG><a name="[d8]"></a>GetProcessData</STRONG> (Thumb, 216 bytes, Stack size 16 bytes, route.o(i.GetProcessData))
+<P><STRONG><a name="[d8]"></a>GetProcessData</STRONG> (Thumb, 232 bytes, Stack size 16 bytes, route.o(i.GetProcessData))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = GetProcessData &rArr; W25QXX_Read_16 &rArr; W25QXX_Read &rArr; SPI2_ReadWriteByte
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25QXX_Read_16
@@ -1282,7 +1282,7 @@ Global Symbols
 <LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Screen_task
 </UL>
 
-<P><STRONG><a name="[d9]"></a>GetProcessDataFrom</STRONG> (Thumb, 194 bytes, Stack size 16 bytes, route.o(i.GetProcessDataFrom))
+<P><STRONG><a name="[d9]"></a>GetProcessDataFrom</STRONG> (Thumb, 210 bytes, Stack size 16 bytes, route.o(i.GetProcessDataFrom))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = GetProcessDataFrom &rArr; W25QXX_Read_16 &rArr; W25QXX_Read &rArr; SPI2_ReadWriteByte
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25QXX_Read_16
@@ -1299,7 +1299,7 @@ Global Symbols
 <LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Screen_task
 </UL>
 
-<P><STRONG><a name="[db]"></a>GetRouteData</STRONG> (Thumb, 70 bytes, Stack size 16 bytes, route.o(i.GetRouteData))
+<P><STRONG><a name="[db]"></a>GetRouteData</STRONG> (Thumb, 74 bytes, Stack size 16 bytes, route.o(i.GetRouteData))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = GetRouteData &rArr; GetRouteStationNum &rArr; W25QXX_Read_16 &rArr; W25QXX_Read &rArr; SPI2_ReadWriteByte
 </UL>
 <BR>[Calls]<UL><LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetRouteStationNum
@@ -1392,7 +1392,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IWDG_Init
 </UL>
 
-<P><STRONG><a name="[e5]"></a>InsertProcessData</STRONG> (Thumb, 242 bytes, Stack size 16 bytes, route.o(i.InsertProcessData))
+<P><STRONG><a name="[e5]"></a>InsertProcessData</STRONG> (Thumb, 270 bytes, Stack size 16 bytes, route.o(i.InsertProcessData))
 <BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = InsertProcessData &rArr; W25QXX_Write_16 &rArr; W25QXX_Write &rArr; W25QXX_Write_NoCheck &rArr; W25QXX_Write_Page &rArr; W25QXX_Wait_Busy &rArr; W25QXX_ReadSR &rArr; SPI2_ReadWriteByte
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25QXX_Write_16
@@ -2680,7 +2680,7 @@ Global Symbols
 <P><STRONG><a name="[a]"></a>SVC_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f4xx_it.o(i.SVC_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f40_41xxx.o(RESET)
 </UL>
-<P><STRONG><a name="[72]"></a>Screen_task</STRONG> (Thumb, 2978 bytes, Stack size 40 bytes, main.o(i.Screen_task))
+<P><STRONG><a name="[72]"></a>Screen_task</STRONG> (Thumb, 2992 bytes, Stack size 40 bytes, main.o(i.Screen_task))
 <BR><BR>[Stack]<UL><LI>Max Depth = 200 + Unknown Stack Size
 <LI>Call Chain = Screen_task &rArr; UserConfigInit &rArr; SetAllParameterToSystem &rArr; W25QXX_Write_16 &rArr; W25QXX_Write &rArr; W25QXX_Write_NoCheck &rArr; W25QXX_Write_Page &rArr; W25QXX_Wait_Busy &rArr; W25QXX_ReadSR &rArr; SPI2_ReadWriteByte
 </UL>
@@ -2744,7 +2744,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Screen_task
 </UL>
 
-<P><STRONG><a name="[16a]"></a>SetProcessData</STRONG> (Thumb, 178 bytes, Stack size 16 bytes, route.o(i.SetProcessData))
+<P><STRONG><a name="[16a]"></a>SetProcessData</STRONG> (Thumb, 198 bytes, Stack size 16 bytes, route.o(i.SetProcessData))
 <BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = SetProcessData &rArr; W25QXX_Write_16 &rArr; W25QXX_Write &rArr; W25QXX_Write_NoCheck &rArr; W25QXX_Write_Page &rArr; W25QXX_Wait_Busy &rArr; W25QXX_ReadSR &rArr; SPI2_ReadWriteByte
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25QXX_Write_16
@@ -2752,7 +2752,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Screen_task
 </UL>
 
-<P><STRONG><a name="[16e]"></a>SetProcessData_pc</STRONG> (Thumb, 86 bytes, Stack size 24 bytes, read.o(i.SetProcessData_pc))
+<P><STRONG><a name="[16e]"></a>SetProcessData_pc</STRONG> (Thumb, 90 bytes, Stack size 24 bytes, read.o(i.SetProcessData_pc))
 <BR><BR>[Stack]<UL><LI>Max Depth = 168<LI>Call Chain = SetProcessData_pc &rArr; W25QXX_Write_16 &rArr; W25QXX_Write &rArr; W25QXX_Write_NoCheck &rArr; W25QXX_Write_Page &rArr; W25QXX_Wait_Busy &rArr; W25QXX_ReadSR &rArr; SPI2_ReadWriteByte
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25QXX_Write_16
@@ -2760,7 +2760,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;data_Parameterreceive
 </UL>
 
-<P><STRONG><a name="[163]"></a>SetRouteData</STRONG> (Thumb, 100 bytes, Stack size 16 bytes, route.o(i.SetRouteData))
+<P><STRONG><a name="[163]"></a>SetRouteData</STRONG> (Thumb, 104 bytes, Stack size 16 bytes, route.o(i.SetRouteData))
 <BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = SetRouteData &rArr; W25QXX_Write_16 &rArr; W25QXX_Write &rArr; W25QXX_Write_NoCheck &rArr; W25QXX_Write_Page &rArr; W25QXX_Wait_Busy &rArr; W25QXX_ReadSR &rArr; SPI2_ReadWriteByte
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25QXX_Write_16
@@ -2768,7 +2768,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Screen_task
 </UL>
 
-<P><STRONG><a name="[16f]"></a>SetRouteData_pc</STRONG> (Thumb, 80 bytes, Stack size 16 bytes, read.o(i.SetRouteData_pc))
+<P><STRONG><a name="[16f]"></a>SetRouteData_pc</STRONG> (Thumb, 84 bytes, Stack size 16 bytes, read.o(i.SetRouteData_pc))
 <BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = SetRouteData_pc &rArr; W25QXX_Write_16 &rArr; W25QXX_Write &rArr; W25QXX_Write_NoCheck &rArr; W25QXX_Write_Page &rArr; W25QXX_Wait_Busy &rArr; W25QXX_ReadSR &rArr; SPI2_ReadWriteByte
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25QXX_Write_16
@@ -2776,7 +2776,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;data_Parameterreceive
 </UL>
 
-<P><STRONG><a name="[167]"></a>SetStationData</STRONG> (Thumb, 82 bytes, Stack size 16 bytes, route.o(i.SetStationData))
+<P><STRONG><a name="[167]"></a>SetStationData</STRONG> (Thumb, 86 bytes, Stack size 16 bytes, route.o(i.SetStationData))
 <BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = SetStationData &rArr; W25QXX_Write_16 &rArr; W25QXX_Write &rArr; W25QXX_Write_NoCheck &rArr; W25QXX_Write_Page &rArr; W25QXX_Wait_Busy &rArr; W25QXX_ReadSR &rArr; SPI2_ReadWriteByte
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25QXX_Write_16
@@ -2784,7 +2784,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Screen_task
 </UL>
 
-<P><STRONG><a name="[170]"></a>StationAction</STRONG> (Thumb, 1876 bytes, Stack size 8 bytes, main.o(i.StationAction))
+<P><STRONG><a name="[170]"></a>StationAction</STRONG> (Thumb, 2118 bytes, Stack size 8 bytes, main.o(i.StationAction))
 <BR><BR>[Stack]<UL><LI>Max Depth = 132 + Unknown Stack Size
 <LI>Call Chain = StationAction &rArr; delay &rArr; OSTimeDlyHMSM &rArr; OS_TickListInsert
 </UL>
@@ -3039,7 +3039,7 @@ Global Symbols
 <LI><a href="#[175]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM2_Int_Init
 </UL>
 
-<P><STRONG><a name="[69]"></a>Task5_task</STRONG> (Thumb, 450 bytes, Stack size 0 bytes, main.o(i.Task5_task))
+<P><STRONG><a name="[69]"></a>Task5_task</STRONG> (Thumb, 482 bytes, Stack size 0 bytes, main.o(i.Task5_task))
 <BR><BR>[Stack]<UL><LI>Max Depth = 132 + Unknown Stack Size
 <LI>Call Chain = Task5_task &rArr; StationAction &rArr; delay &rArr; OSTimeDlyHMSM &rArr; OS_TickListInsert
 </UL>
@@ -3295,25 +3295,25 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;data_Parameterreceive
 </UL>
 
-<P><STRONG><a name="[d5]"></a>UpdataProcessToHmi</STRONG> (Thumb, 78 bytes, Stack size 0 bytes, route.o(i.UpdataProcessToHmi))
+<P><STRONG><a name="[d5]"></a>UpdataProcessToHmi</STRONG> (Thumb, 90 bytes, Stack size 0 bytes, route.o(i.UpdataProcessToHmi))
 <BR><BR>[Called By]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;data_Parameterreceive
 <LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DeleteProcessData
 <LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Screen_task
 </UL>
 
-<P><STRONG><a name="[164]"></a>UpdataStationToHmi</STRONG> (Thumb, 154 bytes, Stack size 0 bytes, route.o(i.UpdataStationToHmi))
+<P><STRONG><a name="[164]"></a>UpdataStationToHmi</STRONG> (Thumb, 182 bytes, Stack size 0 bytes, route.o(i.UpdataStationToHmi))
 <BR><BR>[Called By]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;data_Parameterreceive
 <LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Screen_task
 </UL>
 
-<P><STRONG><a name="[166]"></a>UpdataStationToNow</STRONG> (Thumb, 128 bytes, Stack size 0 bytes, route.o(i.UpdataStationToNow))
+<P><STRONG><a name="[166]"></a>UpdataStationToNow</STRONG> (Thumb, 168 bytes, Stack size 0 bytes, route.o(i.UpdataStationToNow))
 <BR><BR>[Called By]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Screen_task
 </UL>
 
 <P><STRONG><a name="[9]"></a>UsageFault_Handler</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f4xx_it.o(i.UsageFault_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f40_41xxx.o(RESET)
 </UL>
-<P><STRONG><a name="[162]"></a>UserConfigInit</STRONG> (Thumb, 690 bytes, Stack size 8 bytes, function.o(i.UserConfigInit))
+<P><STRONG><a name="[162]"></a>UserConfigInit</STRONG> (Thumb, 694 bytes, Stack size 8 bytes, function.o(i.UserConfigInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 160 + Unknown Stack Size
 <LI>Call Chain = UserConfigInit &rArr; SetAllParameterToSystem &rArr; W25QXX_Write_16 &rArr; W25QXX_Write &rArr; W25QXX_Write_NoCheck &rArr; W25QXX_Write_Page &rArr; W25QXX_Wait_Busy &rArr; W25QXX_ReadSR &rArr; SPI2_ReadWriteByte
 </UL>
@@ -3495,8 +3495,8 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_exit_exit
 </UL>
 
-<P><STRONG><a name="[c2]"></a>data_Parameterreceive</STRONG> (Thumb, 4048 bytes, Stack size 8 bytes, read.o(i.data_Parameterreceive))
-<BR><BR>[Stack]<UL><LI>Max Depth = 176 + Unknown Stack Size
+<P><STRONG><a name="[c2]"></a>data_Parameterreceive</STRONG> (Thumb, 3124 bytes, Stack size 24 bytes, read.o(i.data_Parameterreceive))
+<BR><BR>[Stack]<UL><LI>Max Depth = 192 + Unknown Stack Size
 <LI>Call Chain = data_Parameterreceive &rArr; SetProcessData_pc &rArr; W25QXX_Write_16 &rArr; W25QXX_Write &rArr; W25QXX_Write_NoCheck &rArr; W25QXX_Write_Page &rArr; W25QXX_Wait_Busy &rArr; W25QXX_ReadSR &rArr; SPI2_ReadWriteByte
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
