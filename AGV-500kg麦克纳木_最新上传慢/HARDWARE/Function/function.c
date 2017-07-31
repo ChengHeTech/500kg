@@ -17,21 +17,8 @@ void u6_printf(char* fmt,...)
 		USART_SendData(USART6,(uint8_t)USART6_TX_BUF[j]); 	 //发送数据到串口6 
 	}	
 }
-double speed_vul=5,speed_dis=70;
-void Manual_speed()
-{
-	speed_dis = PLC_Data[50];
-	if(speed_vul<speed_dis)
-	{
-		speed_vul += 1;
-	}
-	else
-	{
-		speed_vul = speed_dis;
-	}
-	delay(0,0,0,10);
-}
-u8 dir=0;
+
+u8 dir=1;//0为正向，1为反向
 //运动控制线程
 //启动，保持原来状态
 //dir为0，方向为正方向触摸屏方向
@@ -55,6 +42,14 @@ void start(void)
 	{
 		YY();
 	}
+	else if(dir == 4)
+	{
+		ZX();
+	}
+	else if(dir == 5)
+	{
+		YX();
+	}
 }
 void stop(void)
 {
@@ -65,6 +60,9 @@ u8  startAsk=0,stopAsk=0,zyAsk=0,yyAsk=0,flag_qd=0;
 u8 	car_statu=0;
 u16 DstSpeed = 80;//这个值是DA的值，最大为255，对应5V
 u8 CAN1_Sebuf[5]={1,0,1,0,0x55};
+u16 xunzhuan_speed = 150;
+u8 jiting_flag = 0,zuoyi_flag = 0,youyi_flag = 0,zuoxuan_flag = 0,youxuan_flag = 0;
+
 void QJ(void)
 {	
 	CAN1_Sebuf[0] = 1;CAN1_Sebuf[1] = 0;
@@ -82,36 +80,35 @@ void ZY(void)
 	CAN1_Sebuf[0] = 0;CAN1_Sebuf[1] = 0;
 	CAN1_Sebuf[2] = 1;CAN1_Sebuf[3] = 1;
 	CAN1_Send_Msg(CAN1_Sebuf,4);
-	
+	Motor_Fzhuan(1,xunzhuan_speed);
+	Motor_Zzhuan(2,xunzhuan_speed);
+	Motor_Fzhuan(3,xunzhuan_speed);
+	Motor_Zzhuan(4,xunzhuan_speed);	
 	speed = 100;
 	while((cdh_16!=0xffff))
 	{	
-		if(Jhwai_flag==0)
+		zuoyi_flag = 0;
+		if((Jhwai_flag==0)&&(jiting_flag == 0))
 		{
-			speed = 100;
-//			PDout(4)=1;
-//			PDout(3)=1;
-//			PDout(1)=1;
-//			PDout(0)=1;
-		}
-		if(car_statu == 1)
-		{
-			speed = 100;		
+			Motor_Fzhuan(1,xunzhuan_speed);
+			Motor_Zzhuan(2,xunzhuan_speed);
+			Motor_Fzhuan(3,xunzhuan_speed);
+			Motor_Zzhuan(4,xunzhuan_speed);
 		}
 		delay(0,0,0,10);
 	}
 	while(!((cdh_16<0xffff)&&(abs(front_cdh16.Distance)<2)))
 	{
-		if(Jhwai_flag==0)
+		if((Jhwai_flag==0)&&(jiting_flag == 0))
 		{
-			speed = 100;
-		}
-		if(car_statu == 1)
-		{
-			speed = 100;		
+			Motor_Fzhuan(1,xunzhuan_speed);
+			Motor_Zzhuan(2,xunzhuan_speed);
+			Motor_Fzhuan(3,xunzhuan_speed);
+			Motor_Zzhuan(4,xunzhuan_speed);			
 		}
 		delay(0,0,0,10);
 	}
+	zuoyi_flag = 1;
 	MotoStop(5);
 }
 void YY(void)
@@ -119,33 +116,119 @@ void YY(void)
 	CAN1_Sebuf[0] = 1;CAN1_Sebuf[1] = 1;
 	CAN1_Sebuf[2] = 0;CAN1_Sebuf[3] = 0;
 	CAN1_Send_Msg(CAN1_Sebuf,4);
-	
+	Motor_Fzhuan(1,xunzhuan_speed);
+	Motor_Zzhuan(2,xunzhuan_speed);
+	Motor_Fzhuan(3,xunzhuan_speed);
+	Motor_Zzhuan(4,xunzhuan_speed);	
 	speed = 100;
 	while((cdh_16!=0xffff))//先出轨
 	{
+		youyi_flag = 0;
 //当避障被挡住时，speed以及电机使能被关，在障碍物挪开时，通过检测Jhwai_flag的值来恢复YY状态	
-		if(Jhwai_flag==0)
+		if((Jhwai_flag==0)&&(jiting_flag == 0))
 		{
-			speed = 100;
-		}
-		if(car_statu == 1)
-		{
-			speed = 100;		
+			Motor_Fzhuan(1,xunzhuan_speed);
+			Motor_Zzhuan(2,xunzhuan_speed);
+			Motor_Fzhuan(3,xunzhuan_speed);
+			Motor_Zzhuan(4,xunzhuan_speed);
 		}
 		delay(0,0,0,10);
 	}
 	while(!((cdh_16<0xffff)&&(abs(front_cdh16.Distance)<2)))//再上轨
 	{			
-		if(Jhwai_flag==0)
+		if((Jhwai_flag==0)&&(jiting_flag == 0))
 		{
-			speed = 100;
-		}
-		if(car_statu == 1)
-		{
-			speed = 100;		
+			Motor_Fzhuan(1,xunzhuan_speed);
+			Motor_Zzhuan(2,xunzhuan_speed);
+			Motor_Fzhuan(3,xunzhuan_speed);
+			Motor_Zzhuan(4,xunzhuan_speed);
 		}
 		delay(0,0,0,10);
 	}
+	youyi_flag = 1;
+	MotoStop(5);
+}
+
+void YX(void)//右旋
+{	
+	CAN1_Sebuf[0] = 0;CAN1_Sebuf[1] = 0;
+	CAN1_Sebuf[2] = 0;CAN1_Sebuf[3] = 0;
+	CAN1_Send_Msg(CAN1_Sebuf,4);
+	Motor_Fzhuan(1,xunzhuan_speed);
+	Motor_Zzhuan(2,xunzhuan_speed);
+	Motor_Fzhuan(3,xunzhuan_speed);
+	Motor_Zzhuan(4,xunzhuan_speed);
+	while((cdh_16!=0xffff))
+	{
+		youxuan_flag = 0;
+		if((Jhwai_flag==0)&&(jiting_flag == 0))
+		{
+			CAN1_Sebuf[0] = 0;CAN1_Sebuf[1] = 0;
+			CAN1_Sebuf[2] = 0;CAN1_Sebuf[3] = 0;
+			CAN1_Send_Msg(CAN1_Sebuf,4);			
+			Motor_Fzhuan(1,xunzhuan_speed);
+			Motor_Zzhuan(2,xunzhuan_speed);
+			Motor_Fzhuan(3,xunzhuan_speed);
+			Motor_Zzhuan(4,xunzhuan_speed);
+		}
+		delay(0,0,0,10);
+	}
+	while(!((cdh_16<0xffff)&&(abs(front_cdh16.Distance)<4)))
+	{
+		if((Jhwai_flag==0)&&(jiting_flag == 0))
+		{
+			CAN1_Sebuf[0] = 0;CAN1_Sebuf[1] = 0;
+			CAN1_Sebuf[2] = 0;CAN1_Sebuf[3] = 0;
+			CAN1_Send_Msg(CAN1_Sebuf,4);
+			Motor_Fzhuan(1,xunzhuan_speed);
+			Motor_Zzhuan(2,xunzhuan_speed);
+			Motor_Fzhuan(3,xunzhuan_speed);
+			Motor_Zzhuan(4,xunzhuan_speed);
+		}
+		delay(0,0,0,10);
+	}
+	youxuan_flag = 1;
+	MotoStop(5);
+}
+void ZX(void)//左旋
+{	
+	CAN1_Sebuf[0] = 1;CAN1_Sebuf[1] = 1;
+	CAN1_Sebuf[2] = 1;CAN1_Sebuf[3] = 1;
+	CAN1_Send_Msg(CAN1_Sebuf,4);
+	Motor_Fzhuan(1,xunzhuan_speed);
+	Motor_Zzhuan(2,xunzhuan_speed);
+	Motor_Fzhuan(3,xunzhuan_speed);
+	Motor_Zzhuan(4,xunzhuan_speed);
+	while((cdh_16!=0xffff))
+	{	
+		zuoxuan_flag = 0;
+		if((Jhwai_flag==0)&&(jiting_flag == 0))
+		{
+			CAN1_Sebuf[0] = 1;CAN1_Sebuf[1] = 1;
+			CAN1_Sebuf[2] = 1;CAN1_Sebuf[3] = 1;
+			CAN1_Send_Msg(CAN1_Sebuf,4);
+			Motor_Fzhuan(1,xunzhuan_speed);
+			Motor_Zzhuan(2,xunzhuan_speed);
+			Motor_Fzhuan(3,xunzhuan_speed);
+			Motor_Zzhuan(4,xunzhuan_speed);
+		}
+		delay(0,0,0,10);
+	}
+	while(!((cdh_16<0xffff)&&(abs(front_cdh16.Distance)<4)))
+	{
+		if((Jhwai_flag==0)&&(jiting_flag == 0))
+		{
+			CAN1_Sebuf[0] = 1;CAN1_Sebuf[1] = 1;
+			CAN1_Sebuf[2] = 1;CAN1_Sebuf[3] = 1;
+			CAN1_Send_Msg(CAN1_Sebuf,4);
+			Motor_Fzhuan(1,xunzhuan_speed);
+			Motor_Zzhuan(2,xunzhuan_speed);
+			Motor_Fzhuan(3,xunzhuan_speed);
+			Motor_Zzhuan(4,xunzhuan_speed);
+		}
+		delay(0,0,0,10);
+	}
+	zuoxuan_flag = 1;
 	MotoStop(5);
 }
 
@@ -170,10 +253,10 @@ void UserConfigInit(void)
 	//获取所有系统参数
 	GetAllParameterFromSystem();
 
-	if(SystemParameter[0]!=6)
+	if(SystemParameter[0]!=5)
 	{
 		//判断标志位
-		SystemParameter[0]=6;
+		SystemParameter[0]=5;
 		
 		//备用
 		SystemParameter[1]=0;
@@ -216,7 +299,7 @@ void UserConfigInit(void)
 		SystemParameter[23] = 3;
 		
 		//路径总数
-		SystemParameter[24] = 10;
+		SystemParameter[24] = RouteNum;
 		
 		//车号
 		SystemParameter[25] = 1;	
@@ -357,23 +440,19 @@ void Motor_Zzhuan(u8 Motor,u32 PWM)
 	switch(Motor)
 	{
 		case 1:	
-			PDout(4)=1;//为0时停止，为1时启动			
-			GPIO_SetBits(GPIOG,GPIO_Pin_15);//方向			
+			PDout(4)=1;//为0时停止，为1时启动					
 			TIM_SetCompare1(TIM4,1000-PWM);		
 		break;
 		case 2:
 			PDout(3)=1;
-			GPIO_ResetBits(GPIOG,GPIO_Pin_13);//方向
 			TIM_SetCompare2(TIM4,1000-PWM);
 		break;
 		case 3:
 			PDout(1)=1;
-			GPIO_SetBits(GPIOB,GPIO_Pin_4);//方向
 			TIM_SetCompare3(TIM4,1000-PWM);
 		break;
 		case 4:
 			PDout(0)=1;
-			GPIO_ResetBits(GPIOG,GPIO_Pin_10);//方向
 			TIM_SetCompare4(TIM4,1000-PWM);
 		break;
 		default:
@@ -388,22 +467,18 @@ void Motor_Fzhuan(u8 Motor,u32 PWM)
 	{
 		case 1:	
 			PDout(4)=1;			
-			GPIO_ResetBits(GPIOG,GPIO_Pin_15);//方向
 			TIM_SetCompare1(TIM4,1000-PWM);
 		break;
 		case 2:
 			PDout(3)=1;
-			GPIO_SetBits(GPIOG,GPIO_Pin_13);//方向
 			TIM_SetCompare2(TIM4,1000-PWM);
 		break;
 		case 3:
 			PDout(1)=1;
-			GPIO_ResetBits(GPIOB,GPIO_Pin_4);//方向
 			TIM_SetCompare3(TIM4,1000-PWM);
 		break;
 		case 4:
 			PDout(0)=1;
-			GPIO_SetBits(GPIOG,GPIO_Pin_10);//方向
 			TIM_SetCompare4(TIM4,1000-PWM);
 		break;
 		default:
@@ -452,49 +527,9 @@ void MotoStop(u8 num)
 u16 speed=0;
 u8 ld_juli=10,Jhwai_flag=0,Yhwai_flag=0,Jhwai_switch=1,Yhwai_switch=0;//雷达蔽障距离
 
-void R_Q(u16 speednum)
-{
-	speed=0;
-	if(dir==0)
-	{
-		while((speed<speednum)&&(car_statu==1))
-		{			
-			if(speed == 0)	speed = 5;
-			speed +=1;
-			delay(0,0,0,10);
-		}
-	}
-	else if(dir==1)
-	{
-		while((speed<speednum)&&(car_statu==1))
-		{
-			if(speed == 0)	speed = 5;			
-			speed +=1;				
-			delay(0,0,0,10);
-		}
-	}
-	else if(dir==2)
-	{
-		while((speed<speednum)&&(car_statu==1))
-		{
-			if(speed == 0)	speed = 5;				
-			speed +=1;				
-			delay(0,0,0,10);
-		}
-	}
-	else if(dir==3)
-	{
-		while((speed<speednum)&&(car_statu==1))
-		{	
-			if(speed == 0)	speed = 5;				
-			speed +=1;				
-			delay(0,0,0,10);
-		}
-	}
-}
 float speed1=0,speed2=0,speed3=0,speed4=0;
 float Cdh1_Inc=0;
-u8 fencha_dir=0;
+u8 fencha_dir=0,tubian_num = 0;
 void PID_Adjust(u16 j_speed,float kp,float ki,float kd)
 {
 	PID.Kp = kp;
@@ -537,10 +572,10 @@ void PID_Adjust(u16 j_speed,float kp,float ki,float kd)
 			if(speed2>1000)	speed2 = 1000;
 			if(speed3>1000)	speed3 = 1000;
 			if(speed4>1000)	speed4 = 1000;
-			if(speed1<50)	speed1 = 50;
-			if(speed2<50)	speed2 = 50;
-			if(speed3<50)	speed3 = 50;
-			if(speed4<50)	speed4 = 50;
+			if(speed1<0)	speed1 = 0;
+			if(speed2<0)	speed2 = 0;
+			if(speed3<0)	speed3 = 0;
+			if(speed4<0)	speed4 = 0;
 
 			Motor_Zzhuan(1,speed1);
 			Motor_Zzhuan(3,speed3);
@@ -584,10 +619,10 @@ void PID_Adjust(u16 j_speed,float kp,float ki,float kd)
 			if(speed2>1000)	speed2 = 1000;
 			if(speed3>1000)	speed3 = 1000;
 			if(speed4>1000)	speed4 = 1000;
-			if(speed1<50)	speed1 = 50;
-			if(speed2<50)	speed2 = 50;
-			if(speed3<50)	speed3 = 50;
-			if(speed4<50)	speed4 = 50;
+			if(speed1<0)	speed1 = 0;
+			if(speed2<0)	speed2 = 0;
+			if(speed3<0)	speed3 = 0;
+			if(speed4<0)	speed4 = 0;
 		
 			Motor_Fzhuan(1,speed1);
 			Motor_Fzhuan(2,speed2);
@@ -595,22 +630,6 @@ void PID_Adjust(u16 j_speed,float kp,float ki,float kd)
 			Motor_Fzhuan(4,speed4);				
 		}
 
-	}
-	else if(dir == 2)
-	{
-		HmiTaskState = 5;
-		Motor_Fzhuan(1,100);
-		Motor_Zzhuan(2,100);
-		Motor_Zzhuan(3,100);
-		Motor_Fzhuan(4,100);
-	}
-	else if(dir == 3)
-	{
-		HmiTaskState = 5;
-		Motor_Zzhuan(1,100);
-		Motor_Fzhuan(2,100);
-		Motor_Fzhuan(3,100);
-		Motor_Zzhuan(4,100);
 	}
 }
 void Clear_ReceBuf(u8 num)

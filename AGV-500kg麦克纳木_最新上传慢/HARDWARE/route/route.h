@@ -13,7 +13,7 @@ extern u16 SystemParameter[SystemParaNum];//系统参数
 //路径: 共500个路径，每个路径100个站点，每个站点16个信息，每个信息2个字节
 #define RouteNum 500  //路径总数
 #define StationNum 100 //每条路径包含站点数
-#define StaiionInfor 25 //每个站点包含信息数
+#define StaiionInfor 20 //每个站点包含信息数
 
 #define RouteStationNumAdress(n) SystemParaNum+n-1  //每条路径包含站点数信息地址
 #define NowRouteInforAdress(n)       RouteStationNumAdress(RouteNum)+1+StationNum*StaiionInfor*(n-1)  //当前路径信息地址
@@ -25,7 +25,7 @@ extern u16 NowRouteInfor[StationNum][StaiionInfor];   //当前路径信息
 //流程: 共500个流程，每个流程100步，每步5个信息，每个信息2个字节
 #define ProcessNum 500  //流程总数
 #define StepNum 100 //每条流程包含步数
-#define StepInfor 50 //每步包含信息数
+#define StepInfor 5 //每步包含信息数
 
 #define ProcessStepNumAdress(n)   NowRouteInforAdress(RouteNum+1)+n  //每个流程包含步数信息地址
 #define NowProcessInforAdress(n)  ProcessStepNumAdress(ProcessNum)+1+StepNum*StepInfor*(n-1)  //当前流程信息地址
@@ -73,7 +73,7 @@ extern u16 HmiProcessCopiedNumTemp;//被复制流程号临时变量
 
 #define HmiRoadData1         PLC_Data[13] //远程红外 默认为0 0：保持1：开2：关
 #define HmiRoadData2         PLC_Data[10] //岔路口左分叉 0：保持1：左分叉 2：右分叉	
-#define HmiRoadData3         PLC_Data[30] //
+#define HmiRoadData3         PLC_Data[75] //
 #define HmiRoadData4         PLC_Data[31] //叉臂下 0：保持 1：叉臂上 2：叉臂下	
 #define HmiRoadData5         PLC_Data[21] //档位默认选择慢速 0：保持 1：慢速 2：中速 3：快速   	       
 #define HmiRoadData6         PLC_Data[1] //地标	

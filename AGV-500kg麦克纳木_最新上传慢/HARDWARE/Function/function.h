@@ -8,6 +8,8 @@ void QJ(void);
 void HT(void);
 void ZY(void);
 void YY(void);
+void ZX(void);
+void YX(void);
 void stop(void);
 void delay(u32 h,u32 m,u32 s,u32 ms);
 void UserConfigInit(void);
@@ -17,7 +19,6 @@ void Motor_Fzhuan(u8 Motor,u32 PWM);
 
 
 void PID_Adjust(u16 j_speed,float kp,float ki,float kd);
-void R_Q(u16 speednum);
 void Clear_ReceBuf(u8 num);
 void MotoStop(u8 num);
 long FloatTohex(float HEX);
@@ -34,5 +35,5 @@ extern u8 dir,startAsk,stopAsk,zyAsk,yyAsk,flag_qd,fencha_dir;
 extern u8 beep_flag,Parameter[100],StationTemp[1000][16],IspTemp[1000];
 extern u8 Jhwai_flag,Yhwai_flag,Jhwai_switch,Yhwai_switch,ld_juli,car_statu;
 extern u16 DstSpeed,StationNum[500],keynumber,voltage,MAh,Current;
-extern u8 CAN1_Sebuf[5];
+extern u8 CAN1_Sebuf[5],jiting_flag,zuoyi_flag,youyi_flag,zuoxuan_flag,youxuan_flag,tubian_num;
 #endif

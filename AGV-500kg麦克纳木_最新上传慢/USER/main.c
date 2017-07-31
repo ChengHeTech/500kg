@@ -62,26 +62,26 @@ CPU_STK	FLOAT_TASK_STK[FLOAT_STK_SIZE];
 void float_task(void *p_arg);
 
 //ÈÎÎñÓÅÏÈ¼¶
-#define Screen_TASK_PRIO		12
+#define DEMO_TASK_PRIO		8
 //ÈÎÎñ¶ÑÕ»´óÐ¡	
-#define Screen_STK_SIZE 		512
+#define DEMO_STK_SIZE 		512
 //ÈÎÎñ¿ØÖÆ¿é
-OS_TCB ScreenTaskTCB;
+OS_TCB DEMOTaskTCB;
 //ÈÎÎñ¶ÑÕ»	
-CPU_STK Screen_TASK_STK[Screen_STK_SIZE];
+CPU_STK DEMO_TASK_STK[DEMO_STK_SIZE];
 //ÈÎÎñº¯Êý
-void Screen_task(void *p_arg);
+void DEMO_task(void *p_arg);
 
 //ÈÎÎñÓÅÏÈ¼¶
-#define PID_TASK_PRIO		9
+#define Task5_TASK_PRIO		9
 //ÈÎÎñ¶ÑÕ»´óÐ¡	
-#define PID_STK_SIZE 		512
+#define Task5_STK_SIZE 		512
 //ÈÎÎñ¿ØÖÆ¿é
-OS_TCB PIDTaskTCB;
+OS_TCB Task5_TaskTCB;
 //ÈÎÎñ¶ÑÕ»	
-CPU_STK PID_TASK_STK[PID_STK_SIZE];
+CPU_STK Task5_TASK_STK[Task5_STK_SIZE];
 //ÈÎÎñº¯Êý
-void PID_task(void *p_arg);
+void Task5_task(void *p_arg);
 
 
 //ÈÎÎñÓÅÏÈ¼¶
@@ -107,16 +107,17 @@ CPU_STK WIFI_TASK_STK[WIFI_STK_SIZE];
 //ÈÎÎñº¯Êý
 void WIFI_task(void *p_arg);
 
+
 //ÈÎÎñÓÅÏÈ¼¶
-#define DEMO_TASK_PRIO		8
+#define Screen_TASK_PRIO		12
 //ÈÎÎñ¶ÑÕ»´óÐ¡	
-#define DEMO_STK_SIZE 		512
+#define Screen_STK_SIZE 		512
 //ÈÎÎñ¿ØÖÆ¿é
-OS_TCB DEMOTaskTCB;
+OS_TCB ScreenTaskTCB;
 //ÈÎÎñ¶ÑÕ»	
-CPU_STK DEMO_TASK_STK[WIFI_STK_SIZE];
+CPU_STK Screen_TASK_STK[Screen_STK_SIZE];
 //ÈÎÎñº¯Êý
-void DEMO_task(void *p_arg);
+void Screen_task(void *p_arg);
 
 
 //ÈÎÎñÓÅÏÈ¼¶
@@ -142,15 +143,15 @@ CPU_STK DEMO2_TASK_STK[DEMO2_STK_SIZE];
 void DEMO2_task(void *p_arg);
 
 //ÈÎÎñÓÅÏÈ¼¶
-#define Task5_TASK_PRIO		15
+#define PID_TASK_PRIO		15
 //ÈÎÎñ¶ÑÕ»´óÐ¡	
-#define Task5_STK_SIZE 		512
+#define PID_STK_SIZE 		512
 //ÈÎÎñ¿ØÖÆ¿é
-OS_TCB Task5_TaskTCB;
+OS_TCB PIDTaskTCB;
 //ÈÎÎñ¶ÑÕ»	
-CPU_STK Task5_TASK_STK[Task5_STK_SIZE];
+CPU_STK PID_TASK_STK[PID_STK_SIZE];
 //ÈÎÎñº¯Êý
-void Task5_task(void *p_arg);
+void PID_task(void *p_arg);
 
 int main(void)
 {
@@ -205,7 +206,7 @@ int main(void)
 	OSStart(&err);  //¿ªÆôUCOSIII
 	while(1);
 }
-u8 State_Autotask=0,State_Controltask=0,State_PIDtask=0,State_Manualtask=1,State_DEMOtask=1,State_WIFItask=1;
+u8 State_Autotask=0,State_Controltask=0,State_PIDtask=0,State_DEMO1task=0,State_Manualtask=1,State_DEMOtask=1,State_WIFItask=1;
 
 //¿ªÊ¼ÈÎÎñº¯Êý
 void start_task(void *p_arg)
@@ -332,19 +333,19 @@ void start_task(void *p_arg)
                  (OS_OPT      )OS_OPT_TASK_STK_CHK|OS_OPT_TASK_STK_CLR, 
                  (OS_ERR 	* )&err);				 
 	//DEMO1
-	OSTaskCreate((OS_TCB 	* )&DEMO1TaskTCB,		
-				 (CPU_CHAR	* )"DEMO1 task", 		
-                 (OS_TASK_PTR )DEMO1_task, 			
-                 (void		* )0,					
-                 (OS_PRIO	  )DEMO1_TASK_PRIO,     	
-                 (CPU_STK   * )&DEMO1_TASK_STK[0],	
-                 (CPU_STK_SIZE)DEMO1_STK_SIZE/10,	
-                 (CPU_STK_SIZE)DEMO1_STK_SIZE,		
-                 (OS_MSG_QTY  )0,					
-                 (OS_TICK	  )0,					
-                 (void   	* )0,				
-                 (OS_OPT      )OS_OPT_TASK_STK_CHK|OS_OPT_TASK_STK_CLR, 
-                 (OS_ERR 	* )&err);	
+//	OSTaskCreate((OS_TCB 	* )&DEMO1TaskTCB,		
+//				 (CPU_CHAR	* )"DEMO1 task", 		
+//                 (OS_TASK_PTR )DEMO1_task, 			
+//                 (void		* )0,					
+//                 (OS_PRIO	  )DEMO1_TASK_PRIO,     	
+//                 (CPU_STK   * )&DEMO1_TASK_STK[0],	
+//                 (CPU_STK_SIZE)DEMO1_STK_SIZE/10,	
+//                 (CPU_STK_SIZE)DEMO1_STK_SIZE,		
+//                 (OS_MSG_QTY  )0,					
+//                 (OS_TICK	  )0,					
+//                 (void   	* )0,				
+//                 (OS_OPT      )OS_OPT_TASK_STK_CHK|OS_OPT_TASK_STK_CLR, 
+//                 (OS_ERR 	* )&err);	
 	//DEMO2
 	OSTaskCreate((OS_TCB 	* )&DEMO2TaskTCB,		
 				 (CPU_CHAR	* )"DEMO2 task", 		
@@ -437,7 +438,12 @@ void Transducer_task(void *p_arg)//ÈÎÎñµ÷¶È£¬ÊÖ¶¯Ê±É¾³ýÓë×Ô¶¯ÓÐ¹ØµÄÈÎÎñ£¬×Ô¶¯Ê±É
 			{
 				OSTaskDel((OS_TCB*)&PIDTaskTCB,&err);
 				State_PIDtask = 0;
-			}				
+			}	
+			if(State_DEMO1task == 1)   
+			{
+				OSTaskDel((OS_TCB*)&DEMO1TaskTCB,&err);
+				State_DEMO1task = 0;
+			}			
 			if(State_Manualtask==0)
 			{
 				//´´½¨ÊÖ¶¯ÈÎÎñ
@@ -485,9 +491,6 @@ void Transducer_task(void *p_arg)//ÈÎÎñµ÷¶È£¬ÊÖ¶¯Ê±É¾³ýÓë×Ô¶¯ÓÐ¹ØµÄÈÎÎñ£¬×Ô¶¯Ê±É
 			speed = ZiDongJiSu;	//×Ô¶¯Ò»¿ªÊ¼Ã»É¨µ½µØ±êÖ®Ç°¸ø¸öËÙ¶È		
 			MotoStop(5);
 			flag_szd = 0;
-//			startAsk = 1;
-//			car_statu = 1;
-//			flag_qd = 1;
 			HmiScreenControlMode = 0;
 			if(State_Manualtask==1)
 			{
@@ -551,6 +554,23 @@ void Transducer_task(void *p_arg)//ÈÎÎñµ÷¶È£¬ÊÖ¶¯Ê±É¾³ýÓë×Ô¶¯ÓÐ¹ØµÄÈÎÎñ£¬×Ô¶¯Ê±É
 							 (OS_ERR 	* )&err);
 							 State_Controltask=1;
 			}
+			if(State_DEMO1task==0)
+			{
+				OSTaskCreate((OS_TCB 	* )&DEMO1TaskTCB,		
+							 (CPU_CHAR	* )"DEMO1 task", 		
+							 (OS_TASK_PTR )DEMO1_task, 			
+							 (void		* )0,					
+							 (OS_PRIO	  )DEMO1_TASK_PRIO,     	
+							 (CPU_STK   * )&DEMO1_TASK_STK[0],	
+							 (CPU_STK_SIZE)DEMO1_STK_SIZE/10,	
+							 (CPU_STK_SIZE)DEMO1_STK_SIZE,		
+							 (OS_MSG_QTY  )0,					
+							 (OS_TICK	  )0,					
+							 (void   	* )0,				
+							 (OS_OPT      )OS_OPT_TASK_STK_CHK|OS_OPT_TASK_STK_CLR, 
+							 (OS_ERR 	* )&err);
+							 State_DEMO1task=1;
+			}						
 			while(SouZiDongQieHuan==0)
 			{
 				delay(0,0,0,10);
@@ -567,34 +587,32 @@ void Auto_task(void *p_arg)
 		if(flag_qd==0)//·ÀÖ¹¶à´ÎÈíÆð
 		{
 			if((QD==0)||(HmiQiDong))
-			{					
+			{	
+				jiting_flag = 0;
 				startAsk = 1;		
 			}
 		}	
-		if((TZ==0)||(HmiTinZhi))
-		{
-			flag_qd = 0;
-			delay(0,0,0,10);
-			stopAsk=1;		
-		}		
+		
 		if(flag_qd==1)
 		{
-			if(dir==0)
+			if((TZ==0)||(HmiTinZhi))
 			{
-				if(QfangZ==0)
-				{
-					stopAsk=1;
-					speek("¼±Í££¬°´Æô¶¯¼üÆô¶¯");
-				}
+				flag_qd = 0;
+				delay(0,0,0,10);
+				stopAsk=1;		
 			}
-			else if(dir==1)
+			if(QfangZ==0)
 			{
-				if(HfangZ==0)
-				{
-					stopAsk=1;
-					speek("¼±Í££¬°´Æô¶¯¼üÆô¶¯");
-				}			
-			}			
+				jiting_flag = 1;
+				stopAsk=1;
+				speek("¼±Í££¬Çë°´Æô¶¯¼üÆô¶¯£¡");
+			}
+			if(HfangZ==0)
+			{
+				jiting_flag = 1;
+				stopAsk=1;
+				speek("¼±Í££¬Çë°´Æô¶¯¼üÆô¶¯£¡");
+			}						
 		}
 		delay(0,0,0,10); //ÑÓÊ±20ms
 	}
@@ -724,6 +742,7 @@ void float_task(void *p_arg)
 {
 	u8 num=0;
 	u8 yuyin_flag=2;
+	u16 cidaohang_now = 0,cidaohang_last = 0;
 	OS_ERR err;
 	p_arg = p_arg;
 	delay_ms(20);
@@ -731,9 +750,6 @@ void float_task(void *p_arg)
 	while(1)
 	{
 		cy_time = PIDZhouQi;
-//		PID.Kp = SPID_P/10.0;
-//		PID.Ki = SPID_I/10.0;
-//		PID.Kd = SPID_D/10.0;
 		PID.Kp = SPID_P/10.0;
 		PID.Ki = SPID_I/1000.0;
 		PID.Kd = SPID_D/10.0;	
@@ -761,7 +777,7 @@ void float_task(void *p_arg)
 		}
 		yuyin_flag = YinLiang;
 		num++;
-		if(num==50)
+		if(num==100)
 		{
 			LED1 = ~LED1;//ÔËÐÐµÆ
 			TongXunDeng=~TongXunDeng;//´¥ÃþÆÁÍ¨Ñ¶Ö¸Ê¾µÆ
@@ -781,8 +797,13 @@ void float_task(void *p_arg)
 		{
 			//¶¯Ì¬Ë¢ÐÂÊÖ¶¯×Ô¶¯ºÍÊ±¼ä°´Å¥µÄÏÔÊ¾»òÒþ²Ø
 			//ÕýÏò¡¢·´Ïò¡¢×óÒÆÕýÏò¡¢×óÒÆ·´Ïò¡¢ÓÒÒÆÕýÏò¡¢ÓÒÒÆ·´Ïò
-			if(PLC_Data[4]==0||PLC_Data[4]==3||PLC_Data[4]==4||PLC_Data[4]==5||PLC_Data[4]==7||PLC_Data[4]==8)
+			if(PLC_Data[4]==0||PLC_Data[4]==3||PLC_Data[4]==4||PLC_Data[4]==5||PLC_Data[4]==7||PLC_Data[4]==8
+				||PLC_Data[4]==10||PLC_Data[4]==11||PLC_Data[4]==12||PLC_Data[4]==13)
 			{
+				if(PLC_Data[4]==10||PLC_Data[4]==11||PLC_Data[4]==12||PLC_Data[4]==13)
+				{
+					PLC_OutPut[23]=1;
+				}
 				PLC_OutPut[0]=1;//ÏÔÊ¾ÊÖ¶¯×Ô¶¯
 				if(PLC_Data[5]==0)//×Ô¶¯
 					PLC_OutPut[1]=1;//ÏÔÊ¾Í£ÁôÊ±¼ä
@@ -793,14 +814,16 @@ void float_task(void *p_arg)
 			{
 				PLC_OutPut[0]=0;//Òþ²ØÊÖ¶¯×Ô¶¯
 				PLC_OutPut[1]=0;//Òþ²ØÍ£ÁôÊ±¼ä
+				PLC_OutPut[23]=0;//Òþ²ØÍ»±ä´ÎÊý
 			}
 		}
-		//µç»ú×ªËÙ¼ÆËã ×ª/Ã¿·ÖÖÓ
-		motor1 = (tim31_count/0.05)*30;
-		motor2 = (tim32_count/0.05)*30;
-		motor3 = (tim91_count/0.05)*30;
-		motor4 = (tim92_count/0.05)*30;
-		delay(0,0,0,10); //ÑÓÊ±20ms
+		cidaohang_now = CiDaoHangShuJu;
+		if((cidaohang_last != 0x0000)&&(cidaohang_now == 0x0000))
+		{
+			tubian_num++;
+		}
+		cidaohang_last = cidaohang_now;
+		delay(0,0,0,5); //ÑÓÊ±5ms
 	}
 }
 
@@ -846,7 +869,7 @@ void StationAction(u16 num)
 	//Í¨¹ý
 	else if(NowRouteInfor[num][6]==1)
 	{
-//                        startAsk=1 ;
+
 	}
 	//Í£³µ
 	else if(NowRouteInfor[num][6]==2)
@@ -1045,7 +1068,145 @@ void StationAction(u16 num)
 		if(NowRouteInfor[num][4] == 1)	speed=PLC_Data[23];
 		if(NowRouteInfor[num][4] == 2)	speed=PLC_Data[24];		
 		dir=0;
-	}                  
+	} 
+	//×óÐýÕýÏò
+	else if(NowRouteInfor[num][6]==10)
+	{
+		while(NowRouteInfor[num][2] != tubian_num)
+		{
+			delay(0,0,0,5);
+		}
+		tubian_num = 0;			
+		stopAsk=1 ;
+		while(stopAsk)
+		{
+			delay(0,0,0,10);
+		}
+		dir=4;
+		if(NowRouteInfor[num][7]==0)
+		{
+			delay(0,0,NowRouteInfor[num][8],0);
+			startAsk=1 ;
+			while(startAsk)
+			{
+				delay(0,0,0,10);
+			}
+			delay(0,0,NowRouteInfor[num][8],0);	
+			if(NowRouteInfor[num][4] == 0)	speed=PLC_Data[22];
+			if(NowRouteInfor[num][4] == 1)	speed=PLC_Data[23];
+			if(NowRouteInfor[num][4] == 2)	speed=PLC_Data[24];			
+			dir=0;
+			startAsk=1;
+			while(startAsk)
+			{
+				delay(0,0,0,10);
+			}					
+		}							
+	}
+	
+	//×óÐý·´Ïò
+	else if(NowRouteInfor[num][6]==11)
+	{
+		while(NowRouteInfor[num][2] != tubian_num)
+		{
+			delay(0,0,0,5);
+		}	
+		tubian_num = 0;			
+		stopAsk=1 ;
+		while(stopAsk)
+		{
+			delay(0,0,0,10);
+		}
+		dir=4;
+		if(NowRouteInfor[num][7]==0)
+		{
+			delay(0,0,NowRouteInfor[num][8],0);
+			startAsk=1 ;
+			while(startAsk)
+			{
+				delay(0,0,0,10);
+			}
+			delay(0,0,NowRouteInfor[num][8],0);	
+			if(NowRouteInfor[num][4] == 0)	speed=PLC_Data[22];
+			if(NowRouteInfor[num][4] == 1)	speed=PLC_Data[23];
+			if(NowRouteInfor[num][4] == 2)	speed=PLC_Data[24];			
+			dir=1;
+			startAsk=1;
+			while(startAsk)
+			{
+				delay(0,0,0,10);
+			}												
+		}
+	}
+	//ÓÒÐýÕýÏò
+	else if(NowRouteInfor[num][6]==12)
+	{
+		while(NowRouteInfor[num][2] != tubian_num)
+		{
+			delay(0,0,0,5);
+		}
+		tubian_num = 0;
+		stopAsk=1 ;
+		while(stopAsk)
+		{
+			delay(0,0,0,10);
+		}
+		dir=5;
+		if(NowRouteInfor[num][7]==0)
+		{
+			delay(0,0,NowRouteInfor[num][8],0);
+			startAsk=1 ;
+			while(startAsk)
+			{
+				delay(0,0,0,10);
+			}
+			delay(0,0,NowRouteInfor[num][8],0);	
+			if(NowRouteInfor[num][4] == 0)	speed=PLC_Data[22];
+			if(NowRouteInfor[num][4] == 1)	speed=PLC_Data[23];
+			if(NowRouteInfor[num][4] == 2)	speed=PLC_Data[24];			
+			dir=0;
+			startAsk=1;
+			while(startAsk)
+			{
+				delay(0,0,0,10);
+			}												
+		}								
+	}
+	
+	//ÓÒÐý·´Ïò
+	else if(NowRouteInfor[num][6]==13)
+	{
+		while(NowRouteInfor[num][2] != tubian_num)
+		{
+			delay(0,0,0,5);
+		}
+		tubian_num = 0;			
+		stopAsk=1 ;
+		while(stopAsk)
+		{
+			delay(0,0,0,10);
+		}
+		dir=5;
+		if(NowRouteInfor[num][7]==0)
+		{
+			delay(0,0,NowRouteInfor[num][8],0);
+			startAsk=1 ;
+			while(startAsk)
+			{
+				delay(0,0,0,10);
+			}
+			delay(0,0,NowRouteInfor[num][8],0);	
+			if(NowRouteInfor[num][4] == 0)	speed=PLC_Data[22];
+			if(NowRouteInfor[num][4] == 1)	speed=PLC_Data[23];
+			if(NowRouteInfor[num][4] == 2)	speed=PLC_Data[24];			
+			dir=1;
+			startAsk=1;
+			while(startAsk)
+			{
+				delay(0,0,0,10);
+			}					
+		}							
+	}
 	//·Ö²æ¿Ú
 	if(NowRouteInfor[num][1]==0)	fencha_dir = 0;
 	if(NowRouteInfor[num][1]==1) 	fencha_dir = 1;
@@ -1940,7 +2101,7 @@ void Task5_task(void *p_arg)
 					}
 				}		
 		}
-		osdelay_ms(10);
+		osdelay_ms(5);
 	}
 }
 void Control_task(void *p_arg)
@@ -1969,7 +2130,7 @@ void Control_task(void *p_arg)
 						MotoStop(5);
 						speek("Ç°·½ÓÐÕÏ°­");
 					}
-					if(((QianZuoLeiDa>ld_juli)&&(QianYouLeiDa>ld_juli))&&(Jhwai_flag == 1))
+					else if(((QianZuoLeiDa>ld_juli)&&(QianYouLeiDa>ld_juli))&&(Jhwai_flag == 1))
 					{
 						OSTimeDlyHMSM(0,0,1,0,OS_OPT_TIME_HMSM_STRICT,&err);
 						HmiTaskState = 5;
@@ -1986,7 +2147,7 @@ void Control_task(void *p_arg)
 						MotoStop(5);
 						speek("Ç°·½ÓÐÕÏ°­");
 					}
-					if(((HouZuoLeiDa>ld_juli)&&(HouYouLeiDa>ld_juli))&&(Jhwai_flag == 1))
+					else if(((HouZuoLeiDa>ld_juli)&&(HouYouLeiDa>ld_juli))&&(Jhwai_flag == 1))
 					{
 						OSTimeDlyHMSM(0,0,1,0,OS_OPT_TIME_HMSM_STRICT,&err);
 						HmiTaskState = 5;
@@ -2003,7 +2164,7 @@ void Control_task(void *p_arg)
 						MotoStop(5);
 						speek("Ç°·½ÓÐÕÏ°­");
 					}
-					if(((ZuoQianLeiDa>ld_juli)&&(ZuoHouLeiDa>ld_juli))&&(Jhwai_flag == 1))
+					else if(((ZuoQianLeiDa>ld_juli)&&(ZuoHouLeiDa>ld_juli))&&(Jhwai_flag == 1))
 					{
 						OSTimeDlyHMSM(0,0,1,0,OS_OPT_TIME_HMSM_STRICT,&err);
 						HmiTaskState = 5;
@@ -2020,7 +2181,41 @@ void Control_task(void *p_arg)
 						MotoStop(5);
 						speek("Ç°·½ÓÐÕÏ°­");
 					}
-					if(((YouQianLeiDa>ld_juli)&&(YouHouLeiDa>ld_juli))&&(Jhwai_flag == 1))
+					else if(((YouQianLeiDa>ld_juli)&&(YouHouLeiDa>ld_juli))&&(Jhwai_flag == 1))
+					{
+						OSTimeDlyHMSM(0,0,1,0,OS_OPT_TIME_HMSM_STRICT,&err);
+						HmiTaskState = 5;
+						Jhwai_flag = 0;
+						startAsk = 1;					
+					}
+				}
+				else if(dir == 4)//×óÐý
+				{
+					if(((YouQianLeiDa<=ld_juli)||(YouHouLeiDa<=ld_juli)||(ZuoQianLeiDa<=ld_juli)||(ZuoHouLeiDa<=ld_juli))&&(Jhwai_flag == 0))
+					{
+						HmiTaskState = 2;
+						Jhwai_flag = 1;
+						MotoStop(5);
+						speek("Ç°·½ÓÐÕÏ°­");
+					}
+					else if(((YouQianLeiDa>ld_juli)&&(YouHouLeiDa>ld_juli)&&(ZuoQianLeiDa>ld_juli)&&(ZuoHouLeiDa>ld_juli))&&(Jhwai_flag == 1))
+					{
+						OSTimeDlyHMSM(0,0,1,0,OS_OPT_TIME_HMSM_STRICT,&err);
+						HmiTaskState = 5;
+						Jhwai_flag = 0;
+						startAsk = 1;					
+					}
+				}
+				else if(dir == 5)//ÓÒÐý
+				{
+					if(((YouQianLeiDa<=ld_juli)||(YouHouLeiDa<=ld_juli)||(ZuoQianLeiDa<=ld_juli)||(ZuoHouLeiDa<=ld_juli))&&(Jhwai_flag == 0))
+					{
+						HmiTaskState = 2;
+						Jhwai_flag = 1;
+						MotoStop(5);
+						speek("Ç°·½ÓÐÕÏ°­");
+					}
+					else if(((YouQianLeiDa>ld_juli)&&(YouHouLeiDa>ld_juli)&&(ZuoQianLeiDa>ld_juli)&&(ZuoHouLeiDa>ld_juli))&&(Jhwai_flag == 1))
 					{
 						OSTimeDlyHMSM(0,0,1,0,OS_OPT_TIME_HMSM_STRICT,&err);
 						HmiTaskState = 5;
@@ -2047,7 +2242,6 @@ void WIFI_task(void *p_arg)
 				if(((QianZuoLeiDa<Manual_juli)||(QianYouLeiDa<Manual_juli)||(QianFangZhuang==0)))
 				{
 					speek_flag=1;
-					speed_vul=0;
 					MotoStop(5);
 				}
 				else
@@ -2060,7 +2254,6 @@ void WIFI_task(void *p_arg)
 				if(((HouZuoLeiDa<Manual_juli)||(HouYouLeiDa<Manual_juli)||(HouFangZhuang==0)))
 				{
 					speek_flag=1;
-					speed_vul=0;
 					MotoStop(5);					
 				}	
 				else
@@ -2073,7 +2266,6 @@ void WIFI_task(void *p_arg)
 				if(((ZuoQianLeiDa<Manual_juli)||(ZuoHouLeiDa<Manual_juli)))
 				{
 					speek_flag=1;
-					speed_vul=0;
 					MotoStop(5);				
 				}	
 				else
@@ -2086,7 +2278,6 @@ void WIFI_task(void *p_arg)
 				if(((YouQianLeiDa<Manual_juli)||(YouHouLeiDa<Manual_juli)))
 				{
 					speek_flag=1;
-					speed_vul=0;
 					MotoStop(5);					
 				}	
 				else
@@ -2099,7 +2290,6 @@ void WIFI_task(void *p_arg)
 				if(((ZuoQianLeiDa<Manual_juli)||(YouHouLeiDa<Manual_juli)))
 				{
 					speek_flag=1;
-					speed_vul=0;
 					MotoStop(5);					
 				}
 				else
@@ -2112,7 +2302,6 @@ void WIFI_task(void *p_arg)
 				if(((ZuoHouLeiDa<Manual_juli)||(YouQianLeiDa<Manual_juli)))
 				{
 					speek_flag=1;
-					speed_vul=0;
 					MotoStop(5);					
 				}	
 				else
@@ -2125,7 +2314,6 @@ void WIFI_task(void *p_arg)
 				if(((QianZuoLeiDa<Manual_juli)||(QianYouLeiDa<Manual_juli)||(ZuoQianLeiDa<Manual_juli)||(ZuoHouLeiDa<Manual_juli)))
 				{
 					speek_flag=1;
-					speed_vul=0;
 					MotoStop(5);					
 				}
 				else
@@ -2138,7 +2326,6 @@ void WIFI_task(void *p_arg)
 				if(((HouZuoLeiDa<Manual_juli)||(HouYouLeiDa<Manual_juli)||(ZuoQianLeiDa<Manual_juli)||(ZuoHouLeiDa<Manual_juli)))
 				{
 					speek_flag=1;
-					speed_vul=0;
 					MotoStop(5);					
 				}	
 				else
@@ -2151,7 +2338,6 @@ void WIFI_task(void *p_arg)
 				if(((QianZuoLeiDa<Manual_juli)||(QianYouLeiDa<Manual_juli)||(YouQianLeiDa<Manual_juli)||(YouHouLeiDa<Manual_juli)))
 				{
 					speek_flag=1;
-					speed_vul=0;
 					MotoStop(5);					
 				}
 				else
@@ -2164,7 +2350,6 @@ void WIFI_task(void *p_arg)
 				if(((HouZuoLeiDa<Manual_juli)||(HouYouLeiDa<Manual_juli)||(YouQianLeiDa<Manual_juli)||(YouHouLeiDa<Manual_juli)))
 				{
 					speek_flag=1;
-					speed_vul=0;
 					MotoStop(5);					
 				}
 				else
@@ -2182,7 +2367,7 @@ void WIFI_task(void *p_arg)
 		{
 			speek_flag=0;
 		}
-		delay(0,0,0,10);
+		delay(0,0,0,5);
 	}
 	
 }
@@ -2207,7 +2392,7 @@ void DEMO1_task(void *p_arg)
 {
 	while(1)
 	{
-		if(startAsk)
+		if(startAsk && (jiting_flag == 0))
 		{
 			if(HmiTask == 0)
 			{
@@ -2219,12 +2404,12 @@ void DEMO1_task(void *p_arg)
 			{
 				start();
 				HmiTaskState = 5;
-				HmiShouZiDongYinCang = 0;//Òþ²ØÆô¶¯ÏÔÊ¾Í£Ö¹
+				HmiShouZiDongYinCang = 1;//Òþ²ØÆô¶¯ÏÔÊ¾Í£Ö¹
 				startAsk = 0;						
 			}
 					
 		}	
-		delay(0,0,0,10);      
+		delay(0,0,0,5);      
 	}
 }
 //Í£Ö¹
@@ -2241,7 +2426,7 @@ void DEMO2_task(void *p_arg)
 		{
 			stop();
 			HmiTaskState = 3;
-			HmiShouZiDongYinCang = 1;//Òþ²ØÍ£Ö¹ÏÔÊ¾Æô¶¯
+			HmiShouZiDongYinCang = 0;//Òþ²ØÍ£Ö¹ÏÔÊ¾Æô¶¯
 			stopAsk = 0;
 		}
 		delay(0,0,0,5);      

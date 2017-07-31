@@ -164,6 +164,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGUARM</Key>
+          <Name></Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -202,7 +203,7 @@
           <Type>0</Type>
           <LineNumber>276</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134265714</Address>
+          <Address>134265718</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -212,70 +213,6 @@
           <Filename>D:\鎴戠殑鏂囨。\GitHub\500kg----\AGV-500kg楹﹀厠绾虫湪_鏈€鏂颁笂浼犳參\HARDWARE\W25QXX\w25qxx.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
-        </Bp>
-        <Bp>
-          <Number>1</Number>
-          <Type>0</Type>
-          <LineNumber>225</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134267508</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>D:\鎴戠殑鏂囨。\GitHub\500kg----\AGV-500kg楹﹀厠绾虫湪_鏈€鏂颁笂浼犳參\HARDWARE\read_PC\read.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression></Expression>
-        </Bp>
-        <Bp>
-          <Number>2</Number>
-          <Type>0</Type>
-          <LineNumber>223</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134267506</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>D:\鎴戠殑鏂囨。\GitHub\500kg----\AGV-500kg楹﹀厠绾虫湪_鏈€鏂颁笂浼犳參\HARDWARE\read_PC\read.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression></Expression>
-        </Bp>
-        <Bp>
-          <Number>3</Number>
-          <Type>0</Type>
-          <LineNumber>420</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134269732</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>D:\鎴戠殑鏂囨。\GitHub\500kg----\AGV-500kg楹﹀厠绾虫湪_鏈€鏂颁笂浼犳參\HARDWARE\read_PC\read.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\Template\../HARDWARE/read_PC/read.c\420</Expression>
-        </Bp>
-        <Bp>
-          <Number>4</Number>
-          <Type>0</Type>
-          <LineNumber>188</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134267286</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>D:\鎴戠殑鏂囨。\GitHub\500kg----\AGV-500kg楹﹀厠绾虫湪_鏈€鏂颁笂浼犳參\HARDWARE\read_PC\read.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\Template\../HARDWARE/read_PC/read.c\188</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -353,6 +290,21 @@
           <count>14</count>
           <WinNumber>1</WinNumber>
           <ItemText>lujing_cun,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>15</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>send6_buf,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>16</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>sum,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>17</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>lujing_number</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>
