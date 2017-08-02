@@ -8,8 +8,8 @@ void QJ(void);
 void HT(void);
 void ZY(void);
 void YY(void);
-void ZX(void);
-void YX(void);
+void ZX(u8 num);
+void YX(u8 num);
 void stop(void);
 void delay(u32 h,u32 m,u32 s,u32 ms);
 void UserConfigInit(void);
@@ -36,4 +36,5 @@ extern u8 beep_flag,Parameter[100],StationTemp[1000][16],IspTemp[1000];
 extern u8 Jhwai_flag,Yhwai_flag,Jhwai_switch,Yhwai_switch,ld_juli,car_statu;
 extern u16 DstSpeed,StationNum[500],keynumber,voltage,MAh,Current;
 extern u8 CAN1_Sebuf[5],jiting_flag,zuoyi_flag,youyi_flag,zuoxuan_flag,youxuan_flag,tubian_num;
+extern u8 XuanZhuanNUM;
 #endif

@@ -589,6 +589,7 @@ void Auto_task(void *p_arg)
 			if((QD==0)||(HmiQiDong))
 			{	
 				jiting_flag = 0;
+				flag_qd=1;
 				startAsk = 1;		
 			}
 		}	
@@ -636,10 +637,10 @@ void Manual_task(void *p_arg)
 				Motor_Zzhuan(4,SouDongSuDu*1.5);
 			}
 			else if((YouXuan==0))//右旋
-				{
-					Motor_Zzhuan(1,SouDongSuDu*1.5);
-					Motor_Zzhuan(3,SouDongSuDu*1.5);
-				}
+			{
+				Motor_Zzhuan(1,SouDongSuDu*1.5);
+				Motor_Zzhuan(3,SouDongSuDu*1.5);
+			}
 		}
 		else if((HouTui==0))//后退
 		{
@@ -654,10 +655,10 @@ void Manual_task(void *p_arg)
 				Motor_Zzhuan(4,SouDongSuDu*1.5);
 			}
 			else if((YouXuan==0))//右旋
-				{
-					Motor_Zzhuan(1,SouDongSuDu*1.5);
-					Motor_Zzhuan(3,SouDongSuDu*1.5);
-				}
+			{
+				Motor_Zzhuan(1,SouDongSuDu*1.5);
+				Motor_Zzhuan(3,SouDongSuDu*1.5);
+			}
 		}
 		else if((ZuoYi==0))//左移
 		{
@@ -741,7 +742,7 @@ u16 motor1=0,motor2=0,motor3=0,motor4=0;
 void float_task(void *p_arg)
 {
 	u8 num=0;
-	u8 yuyin_flag=2;
+	u8 yuyin_flag=0;
 	u16 cidaohang_now = 0,cidaohang_last = 0;
 	OS_ERR err;
 	p_arg = p_arg;
@@ -777,7 +778,7 @@ void float_task(void *p_arg)
 		}
 		yuyin_flag = YinLiang;
 		num++;
-		if(num==100)
+		if(num==200)
 		{
 			LED1 = ~LED1;//运行灯
 			TongXunDeng=~TongXunDeng;//触摸屏通讯指示灯
@@ -791,8 +792,7 @@ void float_task(void *p_arg)
 		{
 			speek("前方有障碍");
 			OSTimeDlyHMSM(0,0,5,0,OS_OPT_TIME_HMSM_STRICT,&err);
-		}
-		
+		}	
 		if(JieMianHao==5)
 		{
 			//动态刷新手动自动和时间按钮的显示或隐藏
@@ -803,6 +803,10 @@ void float_task(void *p_arg)
 				if(PLC_Data[4]==10||PLC_Data[4]==11||PLC_Data[4]==12||PLC_Data[4]==13)
 				{
 					PLC_OutPut[23]=1;
+				}
+				else
+				{
+					PLC_OutPut[23]=0;
 				}
 				PLC_OutPut[0]=1;//显示手动自动
 				if(PLC_Data[5]==0)//自动
@@ -830,14 +834,21 @@ void float_task(void *p_arg)
 //执行站点动作
 void StationAction(u16 num)
 {
-	////清空地标
-	keynumber=0;
 	HmiNextRfidNum = NowRouteInfor[num][5];
+	tubian_num = 0;
 	while(keynumber==0||keynumber!=NowRouteInfor[num][5])	//扫到地标，是目标值的话则跳出while
 	{		
+		if(NowRouteInfor[num][2]>0)
+		{
+			if(NowRouteInfor[num][2] == tubian_num)
+			{
+				keynumber = NowRouteInfor[num][5];
+			}
+		}
 		HmiRfidNum = keynumber;
 		osdelay_ms(20);			
 	}	
+	
 	//避障开关		
 	Jhwai_switch=NowRouteInfor[num][0];
 	//更新到车体
@@ -1071,12 +1082,7 @@ void StationAction(u16 num)
 	} 
 	//左旋正向
 	else if(NowRouteInfor[num][6]==10)
-	{
-		while(NowRouteInfor[num][2] != tubian_num)
-		{
-			delay(0,0,0,5);
-		}
-		tubian_num = 0;			
+	{		
 		stopAsk=1 ;
 		while(stopAsk)
 		{
@@ -1086,6 +1092,7 @@ void StationAction(u16 num)
 		if(NowRouteInfor[num][7]==0)
 		{
 			delay(0,0,NowRouteInfor[num][8],0);
+			XuanZhuanNUM = NowRouteInfor[num][3];
 			startAsk=1 ;
 			while(startAsk)
 			{
@@ -1106,12 +1113,7 @@ void StationAction(u16 num)
 	
 	//左旋反向
 	else if(NowRouteInfor[num][6]==11)
-	{
-		while(NowRouteInfor[num][2] != tubian_num)
-		{
-			delay(0,0,0,5);
-		}	
-		tubian_num = 0;			
+	{		
 		stopAsk=1 ;
 		while(stopAsk)
 		{
@@ -1121,6 +1123,7 @@ void StationAction(u16 num)
 		if(NowRouteInfor[num][7]==0)
 		{
 			delay(0,0,NowRouteInfor[num][8],0);
+			XuanZhuanNUM = NowRouteInfor[num][3];
 			startAsk=1 ;
 			while(startAsk)
 			{
@@ -1141,11 +1144,6 @@ void StationAction(u16 num)
 	//右旋正向
 	else if(NowRouteInfor[num][6]==12)
 	{
-		while(NowRouteInfor[num][2] != tubian_num)
-		{
-			delay(0,0,0,5);
-		}
-		tubian_num = 0;
 		stopAsk=1 ;
 		while(stopAsk)
 		{
@@ -1155,6 +1153,7 @@ void StationAction(u16 num)
 		if(NowRouteInfor[num][7]==0)
 		{
 			delay(0,0,NowRouteInfor[num][8],0);
+			XuanZhuanNUM = NowRouteInfor[num][3];
 			startAsk=1 ;
 			while(startAsk)
 			{
@@ -1175,12 +1174,7 @@ void StationAction(u16 num)
 	
 	//右旋反向
 	else if(NowRouteInfor[num][6]==13)
-	{
-		while(NowRouteInfor[num][2] != tubian_num)
-		{
-			delay(0,0,0,5);
-		}
-		tubian_num = 0;			
+	{			
 		stopAsk=1 ;
 		while(stopAsk)
 		{
@@ -1190,6 +1184,7 @@ void StationAction(u16 num)
 		if(NowRouteInfor[num][7]==0)
 		{
 			delay(0,0,NowRouteInfor[num][8],0);
+			XuanZhuanNUM = NowRouteInfor[num][3];
 			startAsk=1 ;
 			while(startAsk)
 			{
@@ -1199,7 +1194,7 @@ void StationAction(u16 num)
 			if(NowRouteInfor[num][4] == 0)	speed=PLC_Data[22];
 			if(NowRouteInfor[num][4] == 1)	speed=PLC_Data[23];
 			if(NowRouteInfor[num][4] == 2)	speed=PLC_Data[24];			
-			dir=1;
+			dir=1;			
 			startAsk=1;
 			while(startAsk)
 			{
@@ -1563,8 +1558,7 @@ void Screen_task(void*p_arg)
             //参数设置
             //
             while(JieMianHao==9)
-            {				
-				SystemParameter[6] = HmiRouteNum;   //路径号                             
+            {				                            
 				SystemParameter[9] = PLC_Data[22];//慢速
 				SystemParameter[10] = PLC_Data[23];//中速
 				SystemParameter[11] = PLC_Data[24];//快速
@@ -2011,6 +2005,9 @@ void Task5_task(void *p_arg)
 			//执行路径
 			if(HmiTask==1)
 			{
+				////清空地标
+				dir=1;
+				keynumber=0;
 				HmiStationSerialNum = 0;
 				//根据所选路径，执行相应动作
 				for(i=0;i<HmiStationNum;i++)
@@ -2022,6 +2019,9 @@ void Task5_task(void *p_arg)
 				//执行流程
 				if(HmiTask == 2)
 				{
+					////清空地标
+					dir=1;
+					keynumber=0;
 					HmiProcessSerialNum = 0;
 					for(i=0;i<HmiStepNum;i++)
 					{

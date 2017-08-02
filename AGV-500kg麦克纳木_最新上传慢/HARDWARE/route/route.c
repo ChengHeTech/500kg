@@ -116,7 +116,7 @@ void UpdataStationToHmi()
 		HmiRoadData1  = NowRouteInfor[HmiStationSerialNum-1][0];//远程红外 默认开
 		HmiRoadData2  = NowRouteInfor[HmiStationSerialNum-1][1];//岔路口
 		HmiRoadData3  = NowRouteInfor[HmiStationSerialNum-1][2];//突变次数
-//		HmiRoadData4  = NowRouteInfor[HmiStationSerialNum-1][3];//叉臂
+		HmiRoadData4  = NowRouteInfor[HmiStationSerialNum-1][3];//旋转次数
 		HmiRoadData5  = NowRouteInfor[HmiStationSerialNum-1][4];//档位默认选择3
 		HmiRoadData6  = NowRouteInfor[HmiStationSerialNum-1][5];//地标	
 		HmiRoadData7  = NowRouteInfor[HmiStationSerialNum-1][6];//动作	0：停止	1：前进	2:后左	3：后右 4：通过
@@ -130,7 +130,7 @@ void UpdataStationToNow()
 		NowRouteInfor[HmiStationSerialNum-1][0]  = HmiRoadData1 ;//远程红外 默认开
 		NowRouteInfor[HmiStationSerialNum-1][1]  = HmiRoadData2 ;//岔路口
 		NowRouteInfor[HmiStationSerialNum-1][2]  = HmiRoadData3 ;//突变次数
-//		NowRouteInfor[HmiStationSerialNum-1][3]  = HmiRoadData4 ;//叉臂
+		NowRouteInfor[HmiStationSerialNum-1][3]  = HmiRoadData4 ;//旋转次数
 		NowRouteInfor[HmiStationSerialNum-1][4]  = HmiRoadData5 ;//档位默认选择3
 		NowRouteInfor[HmiStationSerialNum-1][5]  = HmiRoadData6 ;//地标	
 		NowRouteInfor[HmiStationSerialNum-1][6]  = HmiRoadData7 ;//动作	0：停止	1：前进	2:后左	3：后右 4：通过
@@ -148,7 +148,7 @@ void ClearStationToHmi()
 	HmiRoadData1  = 0;	//远程红外 默认为0 0：保持1：开2：关
 	HmiRoadData2  = 0;	//岔路口左分叉 0：保持1：左分叉 2：右分叉	
 	HmiRoadData3  = 1;	//突变次数
-//	HmiRoadData4  = 1;	//叉臂下 0：保持 1：叉臂上 2：叉臂下	
+	HmiRoadData4  = 1;	//旋转次数	
 	HmiRoadData5  = 0;	//档位默认选择慢速 0：保持 1：慢速 2：中速 3：快速   	       
 	HmiRoadData6  = 0;	//地标默认0	
 	HmiRoadData7  = 0;	//动作	0：停止	1：前进	2:后左	3：后右  4：通过

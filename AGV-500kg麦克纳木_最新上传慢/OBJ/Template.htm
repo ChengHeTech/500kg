@@ -3,7 +3,7 @@
 <title>Static Call Graph - [..\OBJ\Template.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image ..\OBJ\Template.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050106: Last Updated: Mon Jul 31 11:56:53 2017
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050106: Last Updated: Wed Aug 02 13:07:10 2017
 <BR><P>
 <H3>Maximum Stack Usage =        216 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -763,7 +763,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART4_IRQHandler
 </UL>
 
-<P><STRONG><a name="[6c]"></a>Auto_task</STRONG> (Thumb, 142 bytes, Stack size 0 bytes, main.o(i.Auto_task))
+<P><STRONG><a name="[6c]"></a>Auto_task</STRONG> (Thumb, 146 bytes, Stack size 0 bytes, main.o(i.Auto_task))
 <BR><BR>[Stack]<UL><LI>Max Depth = 128 + Unknown Stack Size
 <LI>Call Chain = Auto_task &rArr; speek &rArr; PrintCom
 </UL>
@@ -950,7 +950,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[163]"></a>ClearStationToHmi</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, route.o(i.ClearStationToHmi))
+<P><STRONG><a name="[163]"></a>ClearStationToHmi</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, route.o(i.ClearStationToHmi))
 <BR><BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Screen_task
 </UL>
 
@@ -978,8 +978,8 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> main.o(i.Transducer_task)
 </UL>
 <P><STRONG><a name="[6f]"></a>DEMO1_task</STRONG> (Thumb, 80 bytes, Stack size 0 bytes, main.o(i.DEMO1_task))
-<BR><BR>[Stack]<UL><LI>Max Depth = 140 + Unknown Stack Size
-<LI>Call Chain = DEMO1_task &rArr; start &rArr; ZY &rArr; delay &rArr; OSTimeDlyHMSM &rArr; OS_TickListInsert
+<BR><BR>[Stack]<UL><LI>Max Depth = 148 + Unknown Stack Size
+<LI>Call Chain = DEMO1_task &rArr; start &rArr; ZX &rArr; delay &rArr; OSTimeDlyHMSM &rArr; OS_TickListInsert
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;start
 <LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speek
@@ -2684,7 +2684,7 @@ Global Symbols
 <P><STRONG><a name="[a]"></a>SVC_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f4xx_it.o(i.SVC_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f40_41xxx.o(RESET)
 </UL>
-<P><STRONG><a name="[73]"></a>Screen_task</STRONG> (Thumb, 2978 bytes, Stack size 40 bytes, main.o(i.Screen_task))
+<P><STRONG><a name="[73]"></a>Screen_task</STRONG> (Thumb, 2970 bytes, Stack size 40 bytes, main.o(i.Screen_task))
 <BR><BR>[Stack]<UL><LI>Max Depth = 200 + Unknown Stack Size
 <LI>Call Chain = Screen_task &rArr; UserConfigInit &rArr; SetAllParameterToSystem &rArr; W25QXX_Write_16 &rArr; W25QXX_Write &rArr; W25QXX_Write_NoCheck &rArr; W25QXX_Write_Page &rArr; W25QXX_Wait_Busy &rArr; W25QXX_ReadSR &rArr; SPI2_ReadWriteByte
 </UL>
@@ -2788,7 +2788,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Screen_task
 </UL>
 
-<P><STRONG><a name="[16e]"></a>StationAction</STRONG> (Thumb, 3038 bytes, Stack size 8 bytes, main.o(i.StationAction))
+<P><STRONG><a name="[16e]"></a>StationAction</STRONG> (Thumb, 2996 bytes, Stack size 8 bytes, main.o(i.StationAction))
 <BR><BR>[Stack]<UL><LI>Max Depth = 132 + Unknown Stack Size
 <LI>Call Chain = StationAction &rArr; delay &rArr; OSTimeDlyHMSM &rArr; OS_TickListInsert
 </UL>
@@ -3043,7 +3043,7 @@ Global Symbols
 <LI><a href="#[173]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM2_Int_Init
 </UL>
 
-<P><STRONG><a name="[69]"></a>Task5_task</STRONG> (Thumb, 450 bytes, Stack size 0 bytes, main.o(i.Task5_task))
+<P><STRONG><a name="[69]"></a>Task5_task</STRONG> (Thumb, 468 bytes, Stack size 0 bytes, main.o(i.Task5_task))
 <BR><BR>[Stack]<UL><LI>Max Depth = 132 + Unknown Stack Size
 <LI>Call Chain = Task5_task &rArr; StationAction &rArr; delay &rArr; OSTimeDlyHMSM &rArr; OS_TickListInsert
 </UL>
@@ -3305,12 +3305,12 @@ Global Symbols
 <LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Screen_task
 </UL>
 
-<P><STRONG><a name="[162]"></a>UpdataStationToHmi</STRONG> (Thumb, 178 bytes, Stack size 0 bytes, route.o(i.UpdataStationToHmi))
+<P><STRONG><a name="[162]"></a>UpdataStationToHmi</STRONG> (Thumb, 202 bytes, Stack size 0 bytes, route.o(i.UpdataStationToHmi))
 <BR><BR>[Called By]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;data_Parameterreceive
 <LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Screen_task
 </UL>
 
-<P><STRONG><a name="[164]"></a>UpdataStationToNow</STRONG> (Thumb, 148 bytes, Stack size 0 bytes, route.o(i.UpdataStationToNow))
+<P><STRONG><a name="[164]"></a>UpdataStationToNow</STRONG> (Thumb, 168 bytes, Stack size 0 bytes, route.o(i.UpdataStationToNow))
 <BR><BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Screen_task
 </UL>
 
@@ -3473,8 +3473,8 @@ Global Symbols
 <BR>[Address Reference Count : 2]<UL><LI> main.o(i.Transducer_task)
 <LI> main.o(i.start_task)
 </UL>
-<P><STRONG><a name="[1aa]"></a>YX</STRONG> (Thumb, 296 bytes, Stack size 8 bytes, function.o(i.YX))
-<BR><BR>[Stack]<UL><LI>Max Depth = 132 + Unknown Stack Size
+<P><STRONG><a name="[1aa]"></a>YX</STRONG> (Thumb, 328 bytes, Stack size 16 bytes, function.o(i.YX))
+<BR><BR>[Stack]<UL><LI>Max Depth = 140 + Unknown Stack Size
 <LI>Call Chain = YX &rArr; delay &rArr; OSTimeDlyHMSM &rArr; OS_TickListInsert
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay
@@ -3486,7 +3486,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;start
 </UL>
 
-<P><STRONG><a name="[1ab]"></a>YY</STRONG> (Thumb, 264 bytes, Stack size 8 bytes, function.o(i.YY))
+<P><STRONG><a name="[1ab]"></a>YY</STRONG> (Thumb, 280 bytes, Stack size 8 bytes, function.o(i.YY))
 <BR><BR>[Stack]<UL><LI>Max Depth = 132 + Unknown Stack Size
 <LI>Call Chain = YY &rArr; delay &rArr; OSTimeDlyHMSM &rArr; OS_TickListInsert
 </UL>
@@ -3499,8 +3499,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;start
 </UL>
 
-<P><STRONG><a name="[1ac]"></a>ZX</STRONG> (Thumb, 296 bytes, Stack size 8 bytes, function.o(i.ZX))
-<BR><BR>[Stack]<UL><LI>Max Depth = 132 + Unknown Stack Size
+<P><STRONG><a name="[1ac]"></a>ZX</STRONG> (Thumb, 324 bytes, Stack size 16 bytes, function.o(i.ZX))
+<BR><BR>[Stack]<UL><LI>Max Depth = 140 + Unknown Stack Size
 <LI>Call Chain = ZX &rArr; delay &rArr; OSTimeDlyHMSM &rArr; OS_TickListInsert
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay
@@ -3512,7 +3512,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;start
 </UL>
 
-<P><STRONG><a name="[1ad]"></a>ZY</STRONG> (Thumb, 264 bytes, Stack size 8 bytes, function.o(i.ZY))
+<P><STRONG><a name="[1ad]"></a>ZY</STRONG> (Thumb, 280 bytes, Stack size 8 bytes, function.o(i.ZY))
 <BR><BR>[Stack]<UL><LI>Max Depth = 132 + Unknown Stack Size
 <LI>Call Chain = ZY &rArr; delay &rArr; OSTimeDlyHMSM &rArr; OS_TickListInsert
 </UL>
@@ -3645,7 +3645,7 @@ Global Symbols
 <LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Recirve_01
 </UL>
 
-<P><STRONG><a name="[72]"></a>float_task</STRONG> (Thumb, 538 bytes, Stack size 32 bytes, main.o(i.float_task))
+<P><STRONG><a name="[72]"></a>float_task</STRONG> (Thumb, 546 bytes, Stack size 32 bytes, main.o(i.float_task))
 <BR><BR>[Stack]<UL><LI>Max Depth = 168 + Unknown Stack Size
 <LI>Call Chain = float_task &rArr; yinling &rArr; speek &rArr; PrintCom
 </UL>
@@ -3735,9 +3735,9 @@ Global Symbols
 <LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Auto_task
 </UL>
 
-<P><STRONG><a name="[c1]"></a>start</STRONG> (Thumb, 94 bytes, Stack size 8 bytes, function.o(i.start))
-<BR><BR>[Stack]<UL><LI>Max Depth = 140 + Unknown Stack Size
-<LI>Call Chain = start &rArr; ZY &rArr; delay &rArr; OSTimeDlyHMSM &rArr; OS_TickListInsert
+<P><STRONG><a name="[c1]"></a>start</STRONG> (Thumb, 102 bytes, Stack size 8 bytes, function.o(i.start))
+<BR><BR>[Stack]<UL><LI>Max Depth = 148 + Unknown Stack Size
+<LI>Call Chain = start &rArr; ZX &rArr; delay &rArr; OSTimeDlyHMSM &rArr; OS_TickListInsert
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ZY
 <LI><a href="#[1ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ZX

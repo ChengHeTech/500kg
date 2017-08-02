@@ -201,110 +201,50 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>276</LineNumber>
+          <LineNumber>1184</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134265718</Address>
+          <Address>134258594</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>D:\鎴戠殑鏂囨。\GitHub\500kg----\AGV-500kg楹﹀厠绾虫湪_鏈€鏂颁笂浼犳參\HARDWARE\W25QXX\w25qxx.c</Filename>
+          <Filename>D:\鎴戠殑鏂囨。\GitHub\500kg----\AGV-500kg楹﹀厠绾虫湪_鏈€鏂颁笂浼犳參\USER\main.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression></Expression>
+          <Expression>\\Template\main.c\1184</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
-          <ItemText>NowRouteInfor,0x0A</ItemText>
+          <ItemText>tubian_num</ItemText>
         </Ww>
         <Ww>
           <count>1</count>
           <WinNumber>1</WinNumber>
-          <ItemText>PLC_Data[27],0x0A</ItemText>
+          <ItemText>NowRouteInfor[0][6],0x0A</ItemText>
         </Ww>
         <Ww>
           <count>2</count>
           <WinNumber>1</WinNumber>
-          <ItemText>HmiRouteCopiedNum&gt;RouteNum</ItemText>
+          <ItemText>NowRouteInfor[0][2]</ItemText>
         </Ww>
         <Ww>
           <count>3</count>
           <WinNumber>1</WinNumber>
-          <ItemText>RouteStationNum,0x0A</ItemText>
+          <ItemText>PLC_Data[75]</ItemText>
         </Ww>
         <Ww>
           <count>4</count>
           <WinNumber>1</WinNumber>
-          <ItemText>ProcessStepNum,0x0A</ItemText>
+          <ItemText>keynumber,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>5</count>
           <WinNumber>1</WinNumber>
-          <ItemText>StaiionInfor</ItemText>
-        </Ww>
-        <Ww>
-          <count>6</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>RouteStationNum[num-1]</ItemText>
-        </Ww>
-        <Ww>
-          <count>7</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>NowRouteInfor</ItemText>
-        </Ww>
-        <Ww>
-          <count>8</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>NowStationInforAdress</ItemText>
-        </Ww>
-        <Ww>
-          <count>9</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>NowStationInforAdress</ItemText>
-        </Ww>
-        <Ww>
-          <count>10</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>NumByteToWrite,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>11</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>WriteAddr,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>12</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>Buffer16</ItemText>
-        </Ww>
-        <Ww>
-          <count>13</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>Buffer_Write</ItemText>
-        </Ww>
-        <Ww>
-          <count>14</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>lujing_cun,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>15</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>send6_buf,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>16</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>sum,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>17</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>lujing_number</ItemText>
+          <ItemText>NowRouteInfor[0][5]</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>

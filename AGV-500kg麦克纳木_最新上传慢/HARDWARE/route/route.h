@@ -73,8 +73,8 @@ extern u16 HmiProcessCopiedNumTemp;//被复制流程号临时变量
 
 #define HmiRoadData1         PLC_Data[13] //远程红外 默认为0 0：保持1：开2：关
 #define HmiRoadData2         PLC_Data[10] //岔路口左分叉 0：保持1：左分叉 2：右分叉	
-#define HmiRoadData3         PLC_Data[75] //
-#define HmiRoadData4         PLC_Data[31] //叉臂下 0：保持 1：叉臂上 2：叉臂下	
+#define HmiRoadData3         PLC_Data[75] //突变次数
+#define HmiRoadData4         PLC_Data[76] //旋转次数	
 #define HmiRoadData5         PLC_Data[21] //档位默认选择慢速 0：保持 1：慢速 2：中速 3：快速   	       
 #define HmiRoadData6         PLC_Data[1] //地标	
 #define HmiRoadData7         PLC_Data[4] //动作	0：停止	1：前进	2:后左	3：后右  4：通过

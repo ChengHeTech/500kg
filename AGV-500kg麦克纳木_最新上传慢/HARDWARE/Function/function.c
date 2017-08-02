@@ -19,6 +19,7 @@ void u6_printf(char* fmt,...)
 }
 
 u8 dir=1;//0为正向，1为反向
+u8 XuanZhuanNUM=1;
 //运动控制线程
 //启动，保持原来状态
 //dir为0，方向为正方向触摸屏方向
@@ -44,11 +45,11 @@ void start(void)
 	}
 	else if(dir == 4)
 	{
-		ZX();
+		ZX(XuanZhuanNUM);
 	}
 	else if(dir == 5)
 	{
-		YX();
+		YX(XuanZhuanNUM);
 	}
 }
 void stop(void)
@@ -60,7 +61,7 @@ u8  startAsk=0,stopAsk=0,zyAsk=0,yyAsk=0,flag_qd=0;
 u8 	car_statu=0;
 u16 DstSpeed = 80;//这个值是DA的值，最大为255，对应5V
 u8 CAN1_Sebuf[5]={1,0,1,0,0x55};
-u16 xunzhuan_speed = 150;
+u16 xunzhuan_speed = 150,pingyi_speed = 100;
 u8 jiting_flag = 0,zuoyi_flag = 0,youyi_flag = 0,zuoxuan_flag = 0,youxuan_flag = 0;
 
 void QJ(void)
@@ -80,31 +81,31 @@ void ZY(void)
 	CAN1_Sebuf[0] = 0;CAN1_Sebuf[1] = 0;
 	CAN1_Sebuf[2] = 1;CAN1_Sebuf[3] = 1;
 	CAN1_Send_Msg(CAN1_Sebuf,4);
-	Motor_Fzhuan(1,xunzhuan_speed);
-	Motor_Zzhuan(2,xunzhuan_speed);
-	Motor_Fzhuan(3,xunzhuan_speed);
-	Motor_Zzhuan(4,xunzhuan_speed);	
+	Motor_Fzhuan(1,pingyi_speed);
+	Motor_Zzhuan(2,pingyi_speed);
+	Motor_Fzhuan(3,pingyi_speed);
+	Motor_Zzhuan(4,pingyi_speed);	
 	speed = 100;
 	while((cdh_16!=0xffff))
 	{	
 		zuoyi_flag = 0;
-		if((Jhwai_flag==0)&&(jiting_flag == 0))
+		if((Jhwai_flag==0)&&(jiting_flag == 0)&&(flag_qd==1))
 		{
-			Motor_Fzhuan(1,xunzhuan_speed);
-			Motor_Zzhuan(2,xunzhuan_speed);
-			Motor_Fzhuan(3,xunzhuan_speed);
-			Motor_Zzhuan(4,xunzhuan_speed);
+			Motor_Fzhuan(1,pingyi_speed);
+			Motor_Zzhuan(2,pingyi_speed);
+			Motor_Fzhuan(3,pingyi_speed);
+			Motor_Zzhuan(4,pingyi_speed);
 		}
 		delay(0,0,0,10);
 	}
 	while(!((cdh_16<0xffff)&&(abs(front_cdh16.Distance)<2)))
 	{
-		if((Jhwai_flag==0)&&(jiting_flag == 0))
+		if((Jhwai_flag==0)&&(jiting_flag == 0)&&(flag_qd==1))
 		{
-			Motor_Fzhuan(1,xunzhuan_speed);
-			Motor_Zzhuan(2,xunzhuan_speed);
-			Motor_Fzhuan(3,xunzhuan_speed);
-			Motor_Zzhuan(4,xunzhuan_speed);			
+			Motor_Fzhuan(1,pingyi_speed);
+			Motor_Zzhuan(2,pingyi_speed);
+			Motor_Fzhuan(3,pingyi_speed);
+			Motor_Zzhuan(4,pingyi_speed);			
 		}
 		delay(0,0,0,10);
 	}
@@ -116,32 +117,32 @@ void YY(void)
 	CAN1_Sebuf[0] = 1;CAN1_Sebuf[1] = 1;
 	CAN1_Sebuf[2] = 0;CAN1_Sebuf[3] = 0;
 	CAN1_Send_Msg(CAN1_Sebuf,4);
-	Motor_Fzhuan(1,xunzhuan_speed);
-	Motor_Zzhuan(2,xunzhuan_speed);
-	Motor_Fzhuan(3,xunzhuan_speed);
-	Motor_Zzhuan(4,xunzhuan_speed);	
+	Motor_Fzhuan(1,pingyi_speed);
+	Motor_Zzhuan(2,pingyi_speed);
+	Motor_Fzhuan(3,pingyi_speed);
+	Motor_Zzhuan(4,pingyi_speed);	
 	speed = 100;
 	while((cdh_16!=0xffff))//先出轨
 	{
 		youyi_flag = 0;
 //当避障被挡住时，speed以及电机使能被关，在障碍物挪开时，通过检测Jhwai_flag的值来恢复YY状态	
-		if((Jhwai_flag==0)&&(jiting_flag == 0))
+		if((Jhwai_flag==0)&&(jiting_flag == 0)&&(flag_qd==1))
 		{
-			Motor_Fzhuan(1,xunzhuan_speed);
-			Motor_Zzhuan(2,xunzhuan_speed);
-			Motor_Fzhuan(3,xunzhuan_speed);
-			Motor_Zzhuan(4,xunzhuan_speed);
+			Motor_Fzhuan(1,pingyi_speed);
+			Motor_Zzhuan(2,pingyi_speed);
+			Motor_Fzhuan(3,pingyi_speed);
+			Motor_Zzhuan(4,pingyi_speed);
 		}
 		delay(0,0,0,10);
 	}
-	while(!((cdh_16<0xffff)&&(abs(front_cdh16.Distance)<2)))//再上轨
+	while(!((cdh_16<0xffff)&&(abs(front_cdh16.Distance)<4)))//再上轨
 	{			
-		if((Jhwai_flag==0)&&(jiting_flag == 0))
+		if((Jhwai_flag==0)&&(jiting_flag == 0)&&(flag_qd==1))
 		{
-			Motor_Fzhuan(1,xunzhuan_speed);
-			Motor_Zzhuan(2,xunzhuan_speed);
-			Motor_Fzhuan(3,xunzhuan_speed);
-			Motor_Zzhuan(4,xunzhuan_speed);
+			Motor_Fzhuan(1,pingyi_speed);
+			Motor_Zzhuan(2,pingyi_speed);
+			Motor_Fzhuan(3,pingyi_speed);
+			Motor_Zzhuan(4,pingyi_speed);
 		}
 		delay(0,0,0,10);
 	}
@@ -149,8 +150,9 @@ void YY(void)
 	MotoStop(5);
 }
 
-void YX(void)//右旋
+void YX(u8 num)//右旋	
 {	
+	u8 i = 0;
 	CAN1_Sebuf[0] = 0;CAN1_Sebuf[1] = 0;
 	CAN1_Sebuf[2] = 0;CAN1_Sebuf[3] = 0;
 	CAN1_Send_Msg(CAN1_Sebuf,4);
@@ -158,40 +160,44 @@ void YX(void)//右旋
 	Motor_Zzhuan(2,xunzhuan_speed);
 	Motor_Fzhuan(3,xunzhuan_speed);
 	Motor_Zzhuan(4,xunzhuan_speed);
-	while((cdh_16!=0xffff))
+	for(i=0;i<num;i++)
 	{
-		youxuan_flag = 0;
-		if((Jhwai_flag==0)&&(jiting_flag == 0))
+		while((cdh_16!=0xffff))
 		{
-			CAN1_Sebuf[0] = 0;CAN1_Sebuf[1] = 0;
-			CAN1_Sebuf[2] = 0;CAN1_Sebuf[3] = 0;
-			CAN1_Send_Msg(CAN1_Sebuf,4);			
-			Motor_Fzhuan(1,xunzhuan_speed);
-			Motor_Zzhuan(2,xunzhuan_speed);
-			Motor_Fzhuan(3,xunzhuan_speed);
-			Motor_Zzhuan(4,xunzhuan_speed);
+			youxuan_flag = 0;
+			if((Jhwai_flag==0)&&(jiting_flag == 0)&&(flag_qd==1))
+			{
+				CAN1_Sebuf[0] = 0;CAN1_Sebuf[1] = 0;
+				CAN1_Sebuf[2] = 0;CAN1_Sebuf[3] = 0;
+				CAN1_Send_Msg(CAN1_Sebuf,4);			
+				Motor_Fzhuan(1,xunzhuan_speed);
+				Motor_Zzhuan(2,xunzhuan_speed);
+				Motor_Fzhuan(3,xunzhuan_speed);
+				Motor_Zzhuan(4,xunzhuan_speed);
+			}
+			delay(0,0,0,10);
 		}
-		delay(0,0,0,10);
-	}
-	while(!((cdh_16<0xffff)&&(abs(front_cdh16.Distance)<4)))
-	{
-		if((Jhwai_flag==0)&&(jiting_flag == 0))
+		while(!((cdh_16<0xffff)&&(abs(front_cdh16.Distance)<4)))
 		{
-			CAN1_Sebuf[0] = 0;CAN1_Sebuf[1] = 0;
-			CAN1_Sebuf[2] = 0;CAN1_Sebuf[3] = 0;
-			CAN1_Send_Msg(CAN1_Sebuf,4);
-			Motor_Fzhuan(1,xunzhuan_speed);
-			Motor_Zzhuan(2,xunzhuan_speed);
-			Motor_Fzhuan(3,xunzhuan_speed);
-			Motor_Zzhuan(4,xunzhuan_speed);
+			if((Jhwai_flag==0)&&(jiting_flag == 0)&&(flag_qd==1))
+			{
+				CAN1_Sebuf[0] = 0;CAN1_Sebuf[1] = 0;
+				CAN1_Sebuf[2] = 0;CAN1_Sebuf[3] = 0;
+				CAN1_Send_Msg(CAN1_Sebuf,4);
+				Motor_Fzhuan(1,xunzhuan_speed);
+				Motor_Zzhuan(2,xunzhuan_speed);
+				Motor_Fzhuan(3,xunzhuan_speed);
+				Motor_Zzhuan(4,xunzhuan_speed);
+			}
+			delay(0,0,0,10);
 		}
-		delay(0,0,0,10);
 	}
 	youxuan_flag = 1;
 	MotoStop(5);
 }
-void ZX(void)//左旋
+void ZX(u8 num)//左旋
 {	
+	u8 i = 0;
 	CAN1_Sebuf[0] = 1;CAN1_Sebuf[1] = 1;
 	CAN1_Sebuf[2] = 1;CAN1_Sebuf[3] = 1;
 	CAN1_Send_Msg(CAN1_Sebuf,4);
@@ -199,34 +205,37 @@ void ZX(void)//左旋
 	Motor_Zzhuan(2,xunzhuan_speed);
 	Motor_Fzhuan(3,xunzhuan_speed);
 	Motor_Zzhuan(4,xunzhuan_speed);
-	while((cdh_16!=0xffff))
-	{	
-		zuoxuan_flag = 0;
-		if((Jhwai_flag==0)&&(jiting_flag == 0))
-		{
-			CAN1_Sebuf[0] = 1;CAN1_Sebuf[1] = 1;
-			CAN1_Sebuf[2] = 1;CAN1_Sebuf[3] = 1;
-			CAN1_Send_Msg(CAN1_Sebuf,4);
-			Motor_Fzhuan(1,xunzhuan_speed);
-			Motor_Zzhuan(2,xunzhuan_speed);
-			Motor_Fzhuan(3,xunzhuan_speed);
-			Motor_Zzhuan(4,xunzhuan_speed);
-		}
-		delay(0,0,0,10);
-	}
-	while(!((cdh_16<0xffff)&&(abs(front_cdh16.Distance)<4)))
+	for(i=0;i<num;i++)
 	{
-		if((Jhwai_flag==0)&&(jiting_flag == 0))
-		{
-			CAN1_Sebuf[0] = 1;CAN1_Sebuf[1] = 1;
-			CAN1_Sebuf[2] = 1;CAN1_Sebuf[3] = 1;
-			CAN1_Send_Msg(CAN1_Sebuf,4);
-			Motor_Fzhuan(1,xunzhuan_speed);
-			Motor_Zzhuan(2,xunzhuan_speed);
-			Motor_Fzhuan(3,xunzhuan_speed);
-			Motor_Zzhuan(4,xunzhuan_speed);
+		while((cdh_16!=0xffff))
+		{	
+			zuoxuan_flag = 0;
+			if((Jhwai_flag==0)&&(jiting_flag == 0)&&(flag_qd==1))
+			{
+				CAN1_Sebuf[0] = 1;CAN1_Sebuf[1] = 1;
+				CAN1_Sebuf[2] = 1;CAN1_Sebuf[3] = 1;
+				CAN1_Send_Msg(CAN1_Sebuf,4);
+				Motor_Fzhuan(1,xunzhuan_speed);
+				Motor_Zzhuan(2,xunzhuan_speed);
+				Motor_Fzhuan(3,xunzhuan_speed);
+				Motor_Zzhuan(4,xunzhuan_speed);
+			}
+			delay(0,0,0,10);
 		}
-		delay(0,0,0,10);
+		while(!((cdh_16<0xffff)&&(abs(front_cdh16.Distance)<4)))
+		{
+			if((Jhwai_flag==0)&&(jiting_flag == 0)&&(flag_qd==1))
+			{
+				CAN1_Sebuf[0] = 1;CAN1_Sebuf[1] = 1;
+				CAN1_Sebuf[2] = 1;CAN1_Sebuf[3] = 1;
+				CAN1_Send_Msg(CAN1_Sebuf,4);
+				Motor_Fzhuan(1,xunzhuan_speed);
+				Motor_Zzhuan(2,xunzhuan_speed);
+				Motor_Fzhuan(3,xunzhuan_speed);
+				Motor_Zzhuan(4,xunzhuan_speed);
+			}
+			delay(0,0,0,10);
+		}
 	}
 	zuoxuan_flag = 1;
 	MotoStop(5);
